@@ -3,6 +3,7 @@ package org.apache.cordova.pdfpluginmanager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,12 +17,16 @@ import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+import com.ionicframework.myionic2project922308.R;
 
 import org.apache.cordova.PluginResult;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.apache.cordova.pdfpluginmanager.PdfPluginManager.btnsList;
 import static org.apache.cordova.pdfpluginmanager.PdfPluginManager.callbackContext;
@@ -52,9 +57,9 @@ public class PdfActivity extends AppCompatActivity
     String pdf = getIntent().getStringExtra("file");
     title = getIntent().getStringExtra("title");
 
-    btn1 = (Button) findViewById(getIdResourceByName("btn1"));
-    btn2 = (Button) findViewById(getIdResourceByName("btn2"));
-    btn3 = (Button) findViewById(getIdResourceByName("btn3"));
+    btn1 = (Button) findViewById(R.id.btn1);
+    btn2 = (Button) findViewById(R.id.btn2);
+    btn3 = (Button) findViewById(R.id.btn3);
 
     ListBtnView.add(btn1);
     ListBtnView.add(btn2);
@@ -63,8 +68,11 @@ public class PdfActivity extends AppCompatActivity
     for(int i = 0; i < btnsList.size();i++){
       ListBtnView.get(i).setVisibility(View.VISIBLE);
       ListBtnView.get(i).setText(btnsList.get(i).getName());
-      if(btnsList.get(i).isDefaulf())
-        ListBtnView.get(i).setSelected(true);
+      if(!btnsList.get(i).isDefaulf()) {
+        ListBtnView.get(i).setBackgroundResource(getDrawableResourceByName("btn_unchecked.xml"));
+
+        ListBtnView.get(i).setTextColor(Color.parseColor("#000053"));
+      }
       final int finalI = i;
       ListBtnView.get(i).setOnClickListener(new View.OnClickListener() {
         @Override
@@ -134,12 +142,6 @@ public class PdfActivity extends AppCompatActivity
     super.onStop();
   }
 
-  public String getStringResourceByName(String resName) {
-    String packageName = getPackageName();
-    int resId = getResources().getIdentifier(resName, "string", packageName);
-    return getString(resId);
-  }
-
   public int getIdResourceByName(String resName) {
     String packageName = getPackageName();
     int resId = getResources().getIdentifier(resName, "id", packageName);
@@ -151,4 +153,11 @@ public class PdfActivity extends AppCompatActivity
     int resId = getResources().getIdentifier(resName, "layout", packageName);
     return resId;
   }
+
+  public int getDrawableResourceByName(String resName) {
+    String packageName = getPackageName();
+    int resId = getResources().getIdentifier(resName, "drawable", packageName);
+    return resId;
+  }
+
 }
