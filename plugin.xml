@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-pdf-reader" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>cordova-plugin-pdf-reader</name>
+    <engines>
+      <engine name="cordova" version=">=5.0.0" />
+    </engines>
+    <dependency id="cordova-plugin-compat" version="^1.1.0" />
+
+  <js-module name="cordova-plugin-pdf-reader" src="www/cordova-plugin-pdf-reader.js">
+        <clobbers target="PdfReader" />
+  </js-module>
+  
+    <platform name="android">
+     <framework src="src/android/pluginmanager.gradle" custom="true" type="gradleReference" />
+
+      <config-file target="res/xml/config.xml" parent="/*">
+        <feature name="PdfPluginManager" >
+          <param name="android-package" value="org.apache.cordova.pdfpluginmanager.PdfPluginManager"/>
+          <param name="onload" value="true" />
+        </feature>
+      </config-file>
+
+      <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <activity android:name="org.apache.cordova.pdfpluginmanager.PdfActivity" android:label="PdfActivity" 
+        android:screenOrientation="portrait" android:theme="@style/PdfTheme"/>
+      </config-file>
+
+      <config-file target="AndroidManifest.xml" parent="/*">
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+      </config-file>
+      
+      <source-file src="src/android/PdfPluginManager.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
+      <source-file src="src/android/PdfActivity.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
+      <source-file src="src/android/PdfUtils.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
+      <source-file src="src/android/BtnObject.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
+      <source-file src="res/android/drawable/btn_selector.xml" target-dir="res/drawable" />
+      <source-file src="res/android/drawable-hdpi/ic_share_white_24dp.png" target-dir="res/drawable-hdpi" />
+      <source-file src="res/android/drawable-mdpi/ic_share_white_24dp.png" target-dir="res/drawable-mdpi" />
+      <source-file src="res/android/drawable-xhdpi/ic_share_white_24dp.png" target-dir="res/drawable-xhdpi" />
+      <source-file src="res/android/drawable-xxhdpi/ic_share_white_24dp.png" target-dir="res/drawable-xxhdpi" />
+      <source-file src="res/android/drawable-xxxhdpi/ic_share_white_24dp.png" target-dir="res/drawable-xxxhdpi" />
+      <source-file src="res/android/drawable-hdpi/ic_arrow_back_white_24dp.png" target-dir="res/drawable-hdpi" />
+      <source-file src="res/android/drawable-mdpi/ic_arrow_back_white_24dp.png" target-dir="res/drawable-mdpi" />
+      <source-file src="res/android/drawable-xhdpi/ic_arrow_back_white_24dp.png" target-dir="res/drawable-xhdpi" />
+      <source-file src="res/android/drawable-xxhdpi/ic_arrow_back_white_24dp.png" target-dir="res/drawable-xxhdpi" />
+      <source-file src="res/android/drawable-xxxhdpi/ic_arrow_back_white_24dp.png" target-dir="res/drawable-xxxhdpi" />
+      <source-file src="res/android/layout/activity_pdf.xml" target-dir="res/layout" />
+      <source-file src="res/android/layout/modal_header.xml" target-dir="res/layout" />
+      <source-file src="res/android/values/colors_pdf.xml" target-dir="res/values" />
+      <source-file src="res/android/values/strings_pdf.xml" target-dir="res/values" />
+      <source-file src="res/android/values/styles_pdf.xml" target-dir="res/values" />
+  </platform>
+</plugin>

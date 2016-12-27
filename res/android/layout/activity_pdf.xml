@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_pdf"
+    android:background="@color/bg_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PdfActivity">
+    <include
+        android:id="@+id/pdf_layout_header"
+        layout="@layout/modal_header"
+        android:layout_width="match_parent"
+        android:layout_height="52dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/pdf_layout_header"
+        android:layout_above="@+id/footerBar">
+        <com.github.barteksc.pdfviewer.PDFView
+            android:id="@+id/pdfView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+    <LinearLayout android:id="@+id/footerBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        style="@android:style/ButtonBar">
+
+        <Button android:id="@+id/btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_selector"
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:text="" />
+
+        <Button android:id="@+id/btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_selector"
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:text="" />
+
+        <Button android:id="@+id/btn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_selector"
+            android:visibility="gone"
+            android:layout_weight="1"
+            android:text="" />
+    </LinearLayout>
+</RelativeLayout>
