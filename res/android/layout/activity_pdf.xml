@@ -16,7 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/pdf_layout_header"
-        android:layout_above="@+id/footerBar">
+        android:layout_above="@+id/footerBar"
+        android:background="@color/white">
         <com.github.barteksc.pdfviewer.PDFView
             android:id="@+id/pdfView"
             android:layout_width="match_parent"
@@ -25,18 +26,26 @@
 
     <LinearLayout android:id="@+id/footerBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="82dp"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/bg_color"
         android:layout_alignParentBottom="true"
-        style="@android:style/ButtonBar">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <Button android:id="@+id/btn1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@drawable/btn_selector"
             android:visibility="gone"
             android:layout_weight="1"
-            android:text="" />
+            android:text="button1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
 
         <Button android:id="@+id/btn2"
             android:layout_width="wrap_content"
@@ -44,7 +53,11 @@
             android:background="@drawable/btn_selector"
             android:visibility="gone"
             android:layout_weight="1"
-            android:text="" />
+            android:text="button2"
+            android:layout_marginRight="16dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
 
         <Button android:id="@+id/btn3"
             android:layout_width="wrap_content"
@@ -52,6 +65,10 @@
             android:background="@drawable/btn_selector"
             android:visibility="gone"
             android:layout_weight="1"
-            android:text="" />
+            android:text="button3"
+            android:layout_marginRight="16dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
     </LinearLayout>
 </RelativeLayout>

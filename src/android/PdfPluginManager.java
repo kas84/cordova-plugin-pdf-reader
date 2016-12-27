@@ -45,11 +45,11 @@ public class PdfPluginManager extends CordovaPlugin {
       try {
         title = args.getString(0);
         url = args.getString(1);
+
         btnsArray = args.getJSONArray(2);
         btnsList.clear();
 
-        //Make sure we don't have more than 3 buttons
-        if(btnsArray.length()>3){
+        if(url.equals("") || url==null || title.equals("") || title==null || btnsArray.length()>3){
           callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, ""));
           return true;
         }
