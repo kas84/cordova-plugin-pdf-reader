@@ -35,6 +35,8 @@
       <source-file src="src/android/PdfUtils.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
       <source-file src="src/android/BtnObject.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
       <source-file src="res/android/drawable/btn_selector.xml" target-dir="res/drawable" />
+      <source-file src="res/android/drawable/btn_unchecked.xml" target-dir="res/drawable" />
+      <source-file src="res/android/drawable/back_button.png" target-dir="res/drawable" />
       <source-file src="res/android/drawable-hdpi/ic_share_white_24dp.png" target-dir="res/drawable-hdpi" />
       <source-file src="res/android/drawable-mdpi/ic_share_white_24dp.png" target-dir="res/drawable-mdpi" />
       <source-file src="res/android/drawable-xhdpi/ic_share_white_24dp.png" target-dir="res/drawable-xhdpi" />
@@ -50,5 +52,7 @@
       <source-file src="res/android/values/colors_pdf.xml" target-dir="res/values" />
       <source-file src="res/android/values/strings_pdf.xml" target-dir="res/values" />
       <source-file src="res/android/values/styles_pdf.xml" target-dir="res/values" />
-  </platform>
+      <source-file src="assets/fonts/gothic_trade_bold.ttf" target-dir="assets/fonts" />
+      <source-file src="assets/fonts/lucinda_grande_regular.ttf" target-dir="assets/fonts" />
+    </platform>
 </plugin>

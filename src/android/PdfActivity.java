@@ -17,7 +17,6 @@ import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
-import com.ionicframework.myionic2project922308.R;
 
 import org.apache.cordova.PluginResult;
 
@@ -44,7 +43,9 @@ public class PdfActivity extends AppCompatActivity
 
   private List<Button> ListBtnView = new ArrayList<Button>();
 
-  String title;
+  private TextView headerTitle;
+
+  private String title;
 
   private PdfUtils pdfUtils;
 
@@ -57,9 +58,9 @@ public class PdfActivity extends AppCompatActivity
     String pdf = getIntent().getStringExtra("file");
     title = getIntent().getStringExtra("title");
 
-    btn1 = (Button) findViewById(R.id.btn1);
-    btn2 = (Button) findViewById(R.id.btn2);
-    btn3 = (Button) findViewById(R.id.btn3);
+    btn1 = (Button) findViewById(getIdResourceByName("btn1"));
+    btn2 = (Button) findViewById(getIdResourceByName("btn2"));
+    btn3 = (Button) findViewById(getIdResourceByName("btn3"));
 
     ListBtnView.add(btn1);
     ListBtnView.add(btn2);
@@ -69,8 +70,7 @@ public class PdfActivity extends AppCompatActivity
       ListBtnView.get(i).setVisibility(View.VISIBLE);
       ListBtnView.get(i).setText(btnsList.get(i).getName());
       if(!btnsList.get(i).isDefaulf()) {
-        ListBtnView.get(i).setBackgroundResource(getDrawableResourceByName("btn_unchecked.xml"));
-
+        ListBtnView.get(i).setBackgroundResource(getDrawableResourceByName("btn_unchecked"));
         ListBtnView.get(i).setTextColor(Color.parseColor("#000053"));
       }
       final int finalI = i;
@@ -89,13 +89,14 @@ public class PdfActivity extends AppCompatActivity
       callbackContext.error("Error opening Pdf");
 
     PDFView pdfView = (PDFView) findViewById(getIdResourceByName("pdfView"));
-    TextView headerTitle =
-            (TextView) findViewById(getIdResourceByName("WebViewHeaderTitle"));
+    headerTitle = (TextView) findViewById(getIdResourceByName("WebViewHeaderTitle"));
     LinearLayout header =
             (LinearLayout) findViewById(getIdResourceByName("pdf_layout_header"));
 
     Button headerBackButton = (Button) findViewById(getIdResourceByName("faBackButton"));
     Button shareBtn = (Button) findViewById(getIdResourceByName("btn_share"));
+
+    setTypefaces();
 
     headerBackButton.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
@@ -140,6 +141,20 @@ public class PdfActivity extends AppCompatActivity
   protected void onStop() {
     callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "PdfActivity Finished"));
     super.onStop();
+  }
+
+  public void setTypefaces(){
+    Typeface font1 = Typeface.createFromAsset(
+            this.getAssets(),
+            "fonts/gothic_trade_bold.ttf");
+    headerTitle.setTypeface(font1);
+
+    Typeface font2 = Typeface.createFromAsset(
+            this.getAssets(),
+            "fonts/lucinda_grande_regular.ttf");
+    btn1.setTypeface(font2);
+    btn2.setTypeface(font2);
+    btn3.setTypeface(font2);
   }
 
   public int getIdResourceByName(String resName) {
