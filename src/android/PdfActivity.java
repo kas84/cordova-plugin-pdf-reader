@@ -69,7 +69,7 @@ public class PdfActivity extends AppCompatActivity
     for(int i = 0; i < btnsList.size();i++){
       ListBtnView.get(i).setVisibility(View.VISIBLE);
       ListBtnView.get(i).setText(btnsList.get(i).getName());
-      if(!btnsList.get(i).isDefaulf()) {
+      if(!btnsList.get(i).isDefaulf().equals("true")) {
         ListBtnView.get(i).setBackgroundResource(getDrawableResourceByName("btn_unchecked"));
         ListBtnView.get(i).setTextColor(Color.parseColor("#000053"));
       }

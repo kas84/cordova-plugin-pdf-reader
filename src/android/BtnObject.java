@@ -8,9 +8,9 @@ public class BtnObject {
 
     private int id;
     private String name;
-    private boolean isDefaulf;
+    private String isDefaulf;
 
-    public BtnObject(int id, String name, boolean isDefaulf) {
+    public BtnObject(int id, String name, String isDefaulf) {
         this.id = id;
         this.name = name;
         this.isDefaulf = isDefaulf;
@@ -32,7 +32,7 @@ public class BtnObject {
         this.name = name;
     }
 
-    public boolean isDefaulf() {
+    public String isDefaulf() {
         return isDefaulf;
     }
 

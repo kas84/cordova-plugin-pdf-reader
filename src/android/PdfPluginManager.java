@@ -58,7 +58,7 @@ public class PdfPluginManager extends CordovaPlugin {
           JSONObject jsonobject = btnsArray.getJSONObject(j);
           int id = jsonobject.getInt("id");
           String name = jsonobject.getString("name");
-          boolean isDefault = jsonobject.getBoolean("isDefault");
+          String isDefault = jsonobject.getString("isDefault");
 
           BtnObject button = new BtnObject(id,name,isDefault);
           btnsList.add(button);
