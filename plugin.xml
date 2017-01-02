@@ -72,14 +72,13 @@
 
     <header-file src="src/ios/PDFViewer.h" />
     <source-file src="src/ios/PDFViewer.m" />
-    <header-file src="src/ios/CDVCamera.h" />
     <source-file src="src/ios/pdfViewerViewController.m" />
     <header-file src="src/ios/pdfViewerViewController.h" />
 
-    <source-file src="src/ios/resources/share.png" target-dir="Resources" />
-    <source-file src="src/ios/resources/share@2.png" target-dir="Resources" />
-    <source-file src="src/ios/resources/back.png" target-dir="Resources" />
-    <source-file src="src/ios/resources/back@2.png" target-dir="Resources" />
+    <source-file src="res/ios/share.png" target-dir="Resources" />
+    <source-file src="res/ios/share@2.png" target-dir="Resources" />
+    <source-file src="res/ios/back.png" target-dir="Resources" />
+    <source-file src="res/ios/back@2.png" target-dir="Resources" />
     <source-file src="assets/fonts/gothic_trade_bold.ttf" target-dir="assets/fonts" />
     <source-file src="assets/fonts/lucinda_grande_regular.ttf" target-dir="assets/fonts" />
     </platform>
