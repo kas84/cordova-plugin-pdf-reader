@@ -9,7 +9,9 @@
   <js-module name="cordova-plugin-pdf-reader" src="www/cordova-plugin-pdf-reader.js">
         <clobbers target="PdfReader" />
   </js-module>
-  
+
+
+    <!-- android -->
     <platform name="android">
      <framework src="src/android/pluginmanager.gradle" custom="true" type="gradleReference" />
 
@@ -55,4 +57,29 @@
       <source-file src="assets/fonts/gothic_trade_bold.ttf" target-dir="assets/fonts" />
       <source-file src="assets/fonts/lucinda_grande_regular.ttf" target-dir="assets/fonts" />
     </platform>
+
+    <!-- ios -->
+    <config-file target="config.xml" parent="/*">
+        <feature name="PdfViewer">
+            <param name="ios-package" value="PDFViewer" />
+        </feature>
+    </config-file>
+
+    <js-module name="cordova-plugin-pdf-reader" src="www/cordova-plugin-pdf-reader.js">
+        <clobbers target="PdfReader" />
+    </js-module>
+
+    <header-file src="src/ios/PDFViewer.h" />
+    <source-file src="src/ios/PDFViewer.m" />
+    <header-file src="src/ios/CDVCamera.h" />
+    <source-file src="src/ios/pdfViewerViewController.m" />
+    <header-file src="src/ios/pdfViewerViewController.h" />
+
+    <source-file src="src/ios/resources/share.png" target-dir="Resources" />
+    <source-file src="src/ios/resources/share@2.png" target-dir="Resources" />
+    <source-file src="src/ios/resources/back.png" target-dir="Resources" />
+    <source-file src="src/ios/resources/back@2.png" target-dir="Resources" />
+    <source-file src="assets/fonts/gothic_trade_bold.ttf" target-dir="assets/fonts" />
+    <source-file src="assets/fonts/lucinda_grande_regular.ttf" target-dir="assets/fonts" />
+
 </plugin>
