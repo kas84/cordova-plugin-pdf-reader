@@ -7,6 +7,7 @@
 //
 
 #import "PdfViewerViewController.h"
+#import "UIColor+BPIColor.h"
 
 #define CUSTOM_ORANGE_COLOR [UIColor colorWithRed:255.0/255.0 green:102/255.0 blue:0/255.0 alpha:1]
 #define CUSTOM_BLUE_COLOR [UIColor colorWithRed:0/255.0 green:0/255.0 blue:83/255.0 alpha:1]
@@ -79,7 +80,7 @@
         vc.buttons = aButtons;
         vc.callbackId = aCallbackId;
     }
-    
+
     return vc;
 }
 
@@ -88,15 +89,15 @@
 {
     [super viewWillAppear:animated];
     self.webView.delegate = self;
-    
+
     // loads everything first into memory before rendering
     self.webView.suppressesIncrementalRendering = YES;
-    
+
     self.webView.scalesPageToFit = YES;
     NSData* fileData = [[NSData alloc] initWithBase64EncodedString:self.fileString options:NSDataBase64DecodingIgnoreUnknownCharacters];
     [self.webView loadData:fileData MIMEType:@"application/pdf" textEncodingName:@"utf-8" baseURL:nil];
-    
-    
+
+
     //[self.view setNeedsUpdateConstraints];
 
 }
@@ -110,11 +111,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.webView.delegate = self;
+    UIColor *btnBorderColor = CUSTOM_BLUE_COLOR;
+    [[self.btn1 layer] setBorderWidth:1.0];
+    [[self.btn1 layer] setBorderColor:[[UIColor colorWithHexString:@"#000053"] CGColor]];
+    [[self.btn2 layer] setBorderWidth:1.0];
+    [[self.btn2 layer] setBorderColor:[[UIColor colorWithHexString:@"#000053"] CGColor]];
+    [[self.btn3 layer] setBorderWidth:1.0];
+    [[self.btn3 layer] setBorderColor:[[UIColor colorWithHexString:@"#000053"] CGColor]];
     self.arrayButtons = [NSArray arrayWithObjects: self.btn1,self.btn2,self.btn3, nil];
     [self setMyButtons:self.buttons];
-    
+
     self.constraintHeightHeader.constant = self.constraintHeightHeader.constant + [UIApplication sharedApplication].statusBarFrame.size.height;
     self.constraintCenterBack.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2;
     [self.view setNeedsUpdateConstraints];
@@ -123,10 +131,10 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
+
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-    
+
     if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
         statusBar.backgroundColor = [UIColor clearColor];
     }
@@ -144,17 +152,17 @@
     transition.type = kCATransitionPush;
     transition.subtype = kCATransitionFromLeft;
     [self.view.window.layer addAnimation:transition forKey:nil];
-    
-    
+
+
     [self dismissViewControllerAnimated:YES
                              completion:^{
     [self removeFromParentViewController];
-        
+
         if(!self.plugin) return;
-                                 
+
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                       messageAsDictionary:@{@"message": @"Modal closed natively, please close modal from client side aswell",@"type": @"CLOSE"}];
-        
+
         [pluginResult setKeepCallbackAsBool:NO];
         [self.plugin.commandDelegate sendPluginResult:pluginResult
                                            callbackId:self.callbackId];
@@ -164,20 +172,20 @@
 - (IBAction)share
 {
     if (!self.isWebViewLoaded) return;
-    
+
     NSURL *resourceUrl = self.webView.request.URL;
-    
+
     NSString *pdfName = self.viewTitle;
-    
+
     NSString *guidPDF = [NSString stringWithFormat:@"%@.pdf", pdfName];
     NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:guidPDF]];
     NSData *pdfData = [NSData dataWithContentsOfURL:resourceUrl];
-    
+
     [pdfData writeToURL:url atomically:NO];
-    
+
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[url]
                                                                                          applicationActivities:nil];
-    
+
     [activityViewController setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
         NSError *errorBlock;
         if([[NSFileManager defaultManager] removeItemAtURL:url error:&errorBlock] == NO) {
@@ -185,11 +193,11 @@
             return;
         }
     }];
-    
+
     [self presentViewController:activityViewController
                        animated:YES
                      completion:nil];
-    
+
 }
 
 - (IBAction)buttonAction : (UIButton*) sender
@@ -200,16 +208,16 @@
     transition.type = kCATransitionPush;
     transition.subtype = kCATransitionFromLeft;
     [self.view.window.layer addAnimation:transition forKey:nil];
-    
-    
+
+
     [self dismissViewControllerAnimated:YES
                              completion:^{
                                  [self removeFromParentViewController];
-                                 
+
                                  if(!self.plugin) return;
-                                 
+
                                  CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                     messageAsString:[NSString stringWithFormat:@"%ld", (long)sender.tag]];
+                                     messageAsDictionary:@{@"message": [NSString stringWithFormat:@"%ld", (long)sender.tag]}];
                                  
                                  [pluginResult setKeepCallbackAsBool:NO];
                                  [self.plugin.commandDelegate sendPluginResult:pluginResult
