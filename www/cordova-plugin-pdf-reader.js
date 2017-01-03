@@ -4,11 +4,11 @@ var argscheck = require('cordova/argscheck'),
 var pdfreader = {
 
 	openPdf: function(title,url,buttonsArray,successCallback, errorCallback){
-		exec(successCallback, errorCallback, "PdfPluginManager", "openPdf", [title,url,buttonsArray]);
+		exec(successCallback, errorCallback, "PDFViewer", "openPdf", [title,url,buttonsArray]);
 	},
 
 	closePdf: function(successCallback, errorCallback) {
-		exec(successCallback, errorCallback, "PdfPluginManager", "closePdf", []);
+		exec(successCallback, errorCallback, "PDFViewer", "closePdf", []);
 	}
 
 };

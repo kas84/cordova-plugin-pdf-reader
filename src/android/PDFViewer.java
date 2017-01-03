@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PdfPluginManager extends CordovaPlugin {
+public class PDFViewer extends CordovaPlugin {
 
   private int READ_EXTERNAL = 0;
 
@@ -36,7 +36,7 @@ public class PdfPluginManager extends CordovaPlugin {
 
   @Override public boolean execute(String action, JSONArray args, CallbackContext callbackContext)
           throws JSONException {
-    PdfPluginManager.callbackContext = callbackContext;
+    PDFViewer.callbackContext = callbackContext;
     String url = "";
     String title = "";
     JSONArray btnsArray = null;

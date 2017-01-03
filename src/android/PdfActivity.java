@@ -27,8 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.apache.cordova.pdfpluginmanager.PdfPluginManager.btnsList;
-import static org.apache.cordova.pdfpluginmanager.PdfPluginManager.callbackContext;
+import static org.apache.cordova.pdfpluginmanager.PDFViewer.btnsList;
+import static org.apache.cordova.pdfpluginmanager.PDFViewer.callbackContext;
 
 public class PdfActivity extends AppCompatActivity
         implements OnPageChangeListener, OnLoadCompleteListener {

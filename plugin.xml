@@ -16,8 +16,8 @@
      <framework src="src/android/pluginmanager.gradle" custom="true" type="gradleReference" />
 
       <config-file target="res/xml/config.xml" parent="/*">
-        <feature name="PdfPluginManager" >
-          <param name="android-package" value="org.apache.cordova.pdfpluginmanager.PdfPluginManager"/>
+        <feature name="PDFViewer" >
+          <param name="android-package" value="org.apache.cordova.pdfpluginmanager.PDFViewer"/>
           <param name="onload" value="true" />
         </feature>
       </config-file>
@@ -32,7 +32,7 @@
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
       </config-file>
       
-      <source-file src="src/android/PdfPluginManager.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
+      <source-file src="src/android/PDFViewer.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
       <source-file src="src/android/PdfActivity.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
       <source-file src="src/android/PdfUtils.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
       <source-file src="src/android/BtnObject.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
@@ -72,8 +72,9 @@
 
     <header-file src="src/ios/PDFViewer.h" />
     <source-file src="src/ios/PDFViewer.m" />
-    <source-file src="src/ios/pdfViewerViewController.m" />
-    <header-file src="src/ios/pdfViewerViewController.h" />
+    <resource-file src="src/ios/PDFViewerViewController.xib" />
+    <source-file src="src/ios/PDFViewerViewController.m" />
+    <header-file src="src/ios/PDFViewerViewController.h" />
 
     <source-file src="res/ios/share.png" target-dir="Resources" />
     <source-file src="res/ios/share@2.png" target-dir="Resources" />
