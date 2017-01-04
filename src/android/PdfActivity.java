@@ -49,6 +49,10 @@ public class PdfActivity extends AppCompatActivity
 
   private PdfUtils pdfUtils;
 
+  private int btnId;
+
+  private boolean btnPressed;
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(getLayoutResourceByName("activity_pdf"));
@@ -66,6 +70,8 @@ public class PdfActivity extends AppCompatActivity
     ListBtnView.add(btn2);
     ListBtnView.add(btn3);
 
+    btnPressed = false;
+
     for(int i = 0; i < btnsList.size();i++){
       ListBtnView.get(i).setVisibility(View.VISIBLE);
       ListBtnView.get(i).setText(btnsList.get(i).getName());
@@ -77,7 +83,8 @@ public class PdfActivity extends AppCompatActivity
       ListBtnView.get(i).setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-          callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, btnsList.get(finalI).getId()));
+          btnId = finalI;
+          btnPressed = true;
           finish();
         }
       });
@@ -139,7 +146,11 @@ public class PdfActivity extends AppCompatActivity
 
   @Override
   protected void onStop() {
-    callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "PdfActivity Finished"));
+    if(btnPressed)
+      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, btnsList.get(btnId).getId()));
+    else
+      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "PdfActivity Finished"));
+
     super.onStop();
   }
 
