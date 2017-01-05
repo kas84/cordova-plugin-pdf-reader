@@ -184,7 +184,6 @@
 
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[url]
                                                                                          applicationActivities:nil];
-
     [activityViewController setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
         NSError *errorBlock;
         if([[NSFileManager defaultManager] removeItemAtURL:url error:&errorBlock] == NO) {
