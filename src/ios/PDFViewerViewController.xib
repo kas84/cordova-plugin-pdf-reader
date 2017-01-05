@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="LucidaGrandeRegular.ttf">
+        <array key="lucinda_grande_regular.ttf">
             <string>LucidaGrande</string>
         </array>
     </customFonts>
@@ -185,15 +185,15 @@
                         <constraint firstAttribute="trailing" secondItem="PiP-Te-TZU" secondAttribute="trailing" id="71T-N8-4tL"/>
                         <constraint firstAttribute="height" constant="80" id="BsH-vD-gTG"/>
                         <constraint firstItem="GUL-Tn-SiX" firstAttribute="centerY" secondItem="dxo-Ps-wHF" secondAttribute="centerY" id="Djp-ts-Ehh"/>
-                        <constraint firstItem="X7p-Uk-o9a" firstAttribute="width" secondItem="GUL-Tn-SiX" secondAttribute="width" id="EMJ-WH-psJ" userLabel="Btn2 Width Equals Btn1 Constraint"/>
+                        <constraint firstItem="X7p-Uk-o9a" firstAttribute="width" secondItem="GUL-Tn-SiX" secondAttribute="width" priority="750" id="EMJ-WH-psJ" userLabel="Btn2 Width Equals Btn1 Constraint"/>
                         <constraint firstAttribute="trailing" secondItem="hg2-Xe-HuG" secondAttribute="trailing" constant="20" id="FFB-XB-obf"/>
                         <constraint firstItem="PiP-Te-TZU" firstAttribute="top" secondItem="dxo-Ps-wHF" secondAttribute="top" id="OKl-0r-8MB"/>
                         <constraint firstItem="PiP-Te-TZU" firstAttribute="leading" secondItem="dxo-Ps-wHF" secondAttribute="leading" id="Xsi-5H-k0g"/>
                         <constraint firstItem="X7p-Uk-o9a" firstAttribute="baseline" secondItem="GUL-Tn-SiX" secondAttribute="baseline" id="Xsl-Ly-8DW" userLabel="Btn3.baseline = Btn1.baseline"/>
                         <constraint firstItem="hg2-Xe-HuG" firstAttribute="centerY" secondItem="dxo-Ps-wHF" secondAttribute="centerY" id="a8Y-Ij-X3c" userLabel="Btn2.centerY = centerY"/>
                         <constraint firstItem="hg2-Xe-HuG" firstAttribute="leading" secondItem="X7p-Uk-o9a" secondAttribute="trailing" constant="25" id="eNT-YX-koz" userLabel="Btn3.leading = Btn2.trailing + 20"/>
-                        <constraint firstItem="X7p-Uk-o9a" firstAttribute="leading" secondItem="GUL-Tn-SiX" secondAttribute="trailing" constant="25" id="fnH-JN-dmR" userLabel="Btn2.leading = Btn1.trailing + 20"/>
-                        <constraint firstItem="GUL-Tn-SiX" firstAttribute="leading" secondItem="dxo-Ps-wHF" secondAttribute="leading" priority="750" constant="20" id="uRi-RL-Qcb"/>
+                        <constraint firstItem="X7p-Uk-o9a" firstAttribute="leading" secondItem="GUL-Tn-SiX" secondAttribute="trailing" priority="750" constant="25" id="fnH-JN-dmR" userLabel="Btn2.leading = Btn1.trailing + 20"/>
+                        <constraint firstItem="GUL-Tn-SiX" firstAttribute="leading" secondItem="dxo-Ps-wHF" secondAttribute="leading" constant="20" id="uRi-RL-Qcb"/>
                     </constraints>
                 </view>
             </subviews>
