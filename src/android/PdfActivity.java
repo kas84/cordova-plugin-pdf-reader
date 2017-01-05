@@ -137,7 +137,7 @@ public class PdfActivity extends AppCompatActivity
   }
 
   @Override public void loadComplete(int nbPages) {
-    callbackContext.success();
+    //callbackContext.success();
   }
 
   @Override public void onPageChanged(int page, int pageCount) {
