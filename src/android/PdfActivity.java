@@ -149,7 +149,7 @@ public class PdfActivity extends AppCompatActivity
     if(btnPressed)
       callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, btnsList.get(btnId).getId()));
     else
-      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "-1 Finished"));
+      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "-1"));
 
     super.onStop();
   }
