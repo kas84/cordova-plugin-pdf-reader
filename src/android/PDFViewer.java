@@ -43,7 +43,6 @@ public class PDFViewer extends CordovaPlugin {
 
     if ("openPdf".equals(action)) {
       try {
-        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "-1"));
         title = args.getString(0);
         url = args.getString(1);
 
@@ -72,6 +71,15 @@ public class PDFViewer extends CordovaPlugin {
         this.openPdf(url, title);
       } catch (Exception e) {
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Failed to open pdf"));
+      }
+      return true;
+    }
+    if ("closePdf".equals(action)) {
+      try {
+        PdfUtils.deleteCachedPdfs();
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, ""));
+      } catch (ActivityNotFoundException e) {
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, ""));
       }
       return true;
     }
