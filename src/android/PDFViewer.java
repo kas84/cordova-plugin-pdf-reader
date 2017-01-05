@@ -74,15 +74,6 @@ public class PDFViewer extends CordovaPlugin {
       }
       return true;
     }
-    if ("closePdf".equals(action)) {
-      try {
-        PdfUtils.deleteCachedPdfs();
-        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, ""));
-      } catch (ActivityNotFoundException e) {
-        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, ""));
-      }
-      return true;
-    }
     return false;  // Returning false results in a "MethodNotFound" error.
   }
 

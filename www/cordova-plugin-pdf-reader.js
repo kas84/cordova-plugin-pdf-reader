@@ -10,7 +10,6 @@ var pdfreader = {
 	closePdf: function(successCallback, errorCallback) {
 		exec(successCallback, errorCallback, "PDFViewer", "closePdf", []);
 	}
-
 };
 
 module.exports = pdfreader;

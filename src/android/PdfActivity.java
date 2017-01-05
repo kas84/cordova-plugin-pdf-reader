@@ -147,7 +147,7 @@ public class PdfActivity extends AppCompatActivity
   @Override
   protected void onStop() {
     if(btnPressed)
-      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, btnsList.get(btnId).getId()));
+      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, String.valueOf(btnsList.get(btnId).getId())));
     else
       callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "-1"));
 
