@@ -161,7 +161,7 @@
         if(!self.plugin) return;
 
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                                              messageAsString:@"-1"];
+                                                              messageAsString:@"-2"];
         [pluginResult setKeepCallbackAsBool:NO];
         [self.plugin.commandDelegate sendPluginResult:pluginResult
                                            callbackId:self.callbackId];
