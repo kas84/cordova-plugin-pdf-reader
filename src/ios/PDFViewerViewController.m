@@ -161,8 +161,7 @@
         if(!self.plugin) return;
 
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                                      messageAsDictionary:@{@"message": @"Modal closed natively, please close modal from client side aswell",@"type": @"CLOSE"}];
-
+                                                              messageAsString:@"-1"];
         [pluginResult setKeepCallbackAsBool:NO];
         [self.plugin.commandDelegate sendPluginResult:pluginResult
                                            callbackId:self.callbackId];
@@ -217,7 +216,7 @@
                                  if(!self.plugin) return;
 
                                  CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                     messageAsDictionary:@{@"message": [NSString stringWithFormat:@"%ld", (long)sender.tag]}];
+                                     messageAsString:[NSString stringWithFormat:@"%ld", (long)sender.tag]];
                                  
                                  [pluginResult setKeepCallbackAsBool:NO];
                                  [self.plugin.commandDelegate sendPluginResult:pluginResult
