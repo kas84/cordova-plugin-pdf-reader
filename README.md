@@ -1,4 +1,4 @@
-<p># cordova-plugin-pdf-reader</p>
+<h1>cordova-plugin-pdf-reader</h1>
 <p>This plugin allows you to open a pdf in a native modal. The model has the following structure: header ( tite name, back button, share button ) and Footer (action buttons). You can define the header title (String), the pdf you want to show (base64), and the number of button in the footer bar ( 0 to 3 buttons ).</p>
 <h2>API Reference</h2>
 <h3>PdfReader</h3>
@@ -39,6 +39,6 @@ PdfReader.openPdf("Title Name","iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAA
 <pre>	onSuccess:
     		res = -1 -&gt; When back Button is pressed.
            	res = x -&gt; When Button with id x is pressed.
-            	res = y -&gt; When Button with id y is pressed.
-            	res = z -&gt; When Button with id z is pressed.
+            res = y -&gt; When Button with id y is pressed.
+            res = z -&gt; When Button with id z is pressed.
   </pre>
