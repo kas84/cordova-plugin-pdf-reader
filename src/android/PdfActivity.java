@@ -49,6 +49,8 @@ public class PdfActivity extends AppCompatActivity
 
   private PdfUtils pdfUtils;
 
+  private LinearLayout footerBar;
+
   private int btnId;
 
   private boolean btnPressed;
@@ -66,28 +68,34 @@ public class PdfActivity extends AppCompatActivity
     btn2 = (Button) findViewById(getIdResourceByName("btn2"));
     btn3 = (Button) findViewById(getIdResourceByName("btn3"));
 
+    footerBar = (LinearLayout) findViewById(getIdResourceByName("footerBar"));
+
     ListBtnView.add(btn1);
     ListBtnView.add(btn2);
     ListBtnView.add(btn3);
 
     btnPressed = false;
 
-    for(int i = 0; i < btnsList.size();i++){
-      ListBtnView.get(i).setVisibility(View.VISIBLE);
-      ListBtnView.get(i).setText(btnsList.get(i).getName());
-      if(!btnsList.get(i).isDefaulf().equals("true")) {
-        ListBtnView.get(i).setBackgroundResource(getDrawableResourceByName("btn_unchecked"));
-        ListBtnView.get(i).setTextColor(Color.parseColor("#000053"));
-      }
-      final int finalI = i;
-      ListBtnView.get(i).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          btnId = finalI;
-          btnPressed = true;
-          finish();
+    if(btnsList.size() == 0){
+      footerBar.setVisibility(View.GONE);
+    }else {
+      for (int i = 0; i < btnsList.size(); i++) {
+        ListBtnView.get(i).setVisibility(View.VISIBLE);
+        ListBtnView.get(i).setText(btnsList.get(i).getName());
+        if (!btnsList.get(i).isDefaulf().equals("true")) {
+          ListBtnView.get(i).setBackgroundResource(getDrawableResourceByName("btn_unchecked"));
+          ListBtnView.get(i).setTextColor(Color.parseColor("#000053"));
         }
-      });
+        final int finalI = i;
+        ListBtnView.get(i).setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            btnId = finalI;
+            btnPressed = true;
+            finish();
+          }
+        });
+      }
     }
 
     final File file = pdfUtils.saveFile(this, title, pdf);
