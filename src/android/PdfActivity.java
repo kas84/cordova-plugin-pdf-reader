@@ -98,7 +98,7 @@ public class PdfActivity extends AppCompatActivity
       }
     }
 
-    final File file = pdfUtils.saveFile(this, title, pdf);
+    final File file = pdfUtils.saveFile(this, title+".pdf", pdf);
 
     if(file == null)
       callbackContext.error("Error opening Pdf");
