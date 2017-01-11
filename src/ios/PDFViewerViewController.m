@@ -95,7 +95,13 @@
 
     self.webView.scalesPageToFit = YES;
     NSData* fileData = [[NSData alloc] initWithBase64EncodedString:self.fileString options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    [self.webView loadData:fileData MIMEType:@"application/pdf" textEncodingName:@"utf-8" baseURL:nil];
+    NSString *pdfName = self.viewTitle;
+
+    NSString *guidPDF = [NSString stringWithFormat:@"%@.pdf", pdfName];
+    NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:guidPDF]];
+    [fileData writeToURL:url atomically:NO];
+
+    [self.webView loadData:fileData MIMEType:@"application/pdf" textEncodingName:@"utf-8" baseURL:url];
 
 
     //[self.view setNeedsUpdateConstraints];
@@ -174,19 +180,11 @@
 
     NSURL *resourceUrl = self.webView.request.URL;
 
-    NSString *pdfName = self.viewTitle;
-
-    NSString *guidPDF = [NSString stringWithFormat:@"%@.pdf", pdfName];
-    NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:guidPDF]];
-    NSData *pdfData = [NSData dataWithContentsOfURL:resourceUrl];
-
-    [pdfData writeToURL:url atomically:NO];
-
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[url]
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[resourceUrl]
                                                                                          applicationActivities:nil];
     [activityViewController setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
         NSError *errorBlock;
-        if([[NSFileManager defaultManager] removeItemAtURL:url error:&errorBlock] == NO) {
+        if([[NSFileManager defaultManager] removeItemAtURL:resourceUrl error:&errorBlock] == NO) {
             NSLog(@"error deleting file %@", errorBlock.localizedDescription);
             return;
         }
