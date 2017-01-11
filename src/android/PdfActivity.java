@@ -108,7 +108,7 @@ public class PdfActivity extends AppCompatActivity
     LinearLayout header =
             (LinearLayout) findViewById(getIdResourceByName("pdf_layout_header"));
 
-    Button headerBackButton = (Button) findViewById(getIdResourceByName("faBackButton"));
+    RelativeLayout headerBackButton = (RelativeLayout) findViewById(getIdResourceByName("faBackButton"));
     Button shareBtn = (Button) findViewById(getIdResourceByName("btn_share"));
 
     setTypefaces();
