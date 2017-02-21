@@ -39,6 +39,7 @@ public class PDFViewer extends CordovaPlugin {
     PDFViewer.callbackContext = callbackContext;
     String url = "";
     String title = "";
+    String subject = null;
     JSONArray btnsArray = null;
 
     if ("openPdf".equals(action)) {
