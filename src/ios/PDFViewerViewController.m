@@ -28,6 +28,7 @@
 
 @property(strong, nonatomic) NSString *fileString;
 @property(strong, nonatomic) NSString *viewTitle;
+@property(strong, nonatomic) NSString *subject;
 
 @property(strong, nonatomic) CDVPlugin *plugin;
 @property(strong, nonatomic) NSString *callbackId;
@@ -66,10 +67,11 @@
 #pragma mark - Convenience methods
 
 + (instancetype) initWithFileString:(NSString *)fileString
-                    andTitle:(NSString *)aTitle
-                  withPlugin:(CDVPlugin *)aPlugin
+                           andTitle:(NSString *)aTitle
+                         withPlugin:(CDVPlugin *)aPlugin
                         withButtons:(NSArray *) aButtons
-               andCallbackId:(NSString *)aCallbackId
+                        withSubject:(NSString*) subject
+                      andCallbackId:(NSString *)aCallbackId
 {
     PDFViewerViewController *vc = [[PDFViewerViewController alloc] init];
     if(vc)
@@ -78,6 +80,7 @@
         vc.viewTitle = aTitle;
         vc.plugin = aPlugin;
         vc.buttons = aButtons;
+        vc.subject = subject;
         vc.callbackId = aCallbackId;
     }
 
@@ -181,7 +184,11 @@
     NSURL *resourceUrl = self.webView.request.URL;
 
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[resourceUrl]
-                                                                                         applicationActivities:nil];
+                                                                                        applicationActivities:nil];
+    if(self.subject && ![self.subject isEqualToString:@""])
+    {
+        [activityViewController setValue:self.subject forKey:@"subject"];
+    }
     [activityViewController setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
         NSError *errorBlock;
         if([[NSFileManager defaultManager] removeItemAtURL:resourceUrl error:&errorBlock] == NO) {
