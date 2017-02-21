@@ -47,6 +47,7 @@ public class PdfActivity extends AppCompatActivity
   private TextView headerTitle;
 
   private String title;
+  private String subject;
 
   private PdfUtils pdfUtils;
 
@@ -64,6 +65,7 @@ public class PdfActivity extends AppCompatActivity
 
     String pdf = getIntent().getStringExtra("file");
     title = getIntent().getStringExtra("title");
+    subject = getIntent().getStringExtra("subject");
 
     btn1 = (Button) findViewById(getIdResourceByName("btn1"));
     btn2 = (Button) findViewById(getIdResourceByName("btn2"));
@@ -125,7 +127,7 @@ public class PdfActivity extends AppCompatActivity
       @Override public void onClick(View v) {
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.putExtra(Intent.EXTRA_EMAIL, "");
-        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, title);
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
         sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
         sharingIntent.setType("application/pdf");
         startActivity(Intent.createChooser(sharingIntent, "Share via"));

@@ -45,8 +45,13 @@ public class PDFViewer extends CordovaPlugin {
       try {
         title = args.getString(0);
         url = args.getString(1);
-
         btnsArray = args.getJSONArray(2);
+        if(args.length() > 3){
+            subject = args.getString(3);
+            if(subject != null && subject.equals("null")){
+                subject = null;
+            }
+        }
         btnsList.clear();
 
         if(url.equals("") || url==null || title.equals("") || title==null || btnsArray.length()>3){
@@ -68,7 +73,7 @@ public class PDFViewer extends CordovaPlugin {
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, ""));
       }
       try {
-        this.openPdf(url, title);
+        this.openPdf(url, title, subject);
       } catch (Exception e) {
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Failed to open pdf"));
       }
@@ -86,13 +91,14 @@ public class PDFViewer extends CordovaPlugin {
     return false;  // Returning false results in a "MethodNotFound" error.
   }
 
-  private void openPdf(String url, String title) {
+  private void openPdf(String url, String title, String subject) {
     if (!PermissionHelper.hasPermission(this, READ)) {
       PermissionHelper.requestPermissions(this, READ_EXTERNAL, new String[] {READ, WRITE});
     } else {
       Intent intent = new Intent(cordova.getActivity(), PdfActivity.class);
       intent.putExtra("file", url);
       intent.putExtra("title", title);
+      intent.putExtra("subject", (subject != null)? subject: title);
       cordova.getActivity().startActivity(intent);
     }
   }

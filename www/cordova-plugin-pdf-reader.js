@@ -3,9 +3,9 @@ var argscheck = require('cordova/argscheck'),
 
 var pdfreader = {
 
-	openPdf: function(title,url,buttonsArray,successCallback, errorCallback){
-		exec(successCallback, errorCallback, "PDFViewer", "openPdf", [title,url,buttonsArray]);
-	},
+    openPdf: function(title,url,buttonsArray,successCallback, errorCallback, subject){
+        exec(successCallback, errorCallback, "PDFViewer", "openPdf", [title,url,buttonsArray, subject]);
+    },
 
 	closePdf: function(successCallback, errorCallback) {
 		exec(successCallback, errorCallback, "PDFViewer", "closePdf", []);
