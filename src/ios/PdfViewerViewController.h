@@ -13,8 +13,9 @@
 @interface PDFViewerViewController : UIViewController<UIWebViewDelegate, NSURLConnectionDelegate>
 
 + (instancetype) initWithFileString:(NSString *)fileString
-                    andTitle:(NSString *)aTitle
-                 withPlugin:(CDVPlugin *)aPlugin
-                        withButtons: (NSArray *) aButtons
-               andCallbackId:(NSString *)aCallbackId;
+                           andTitle:(NSString *)aTitle
+                         withPlugin:(CDVPlugin *)aPlugin
+                        withButtons:(NSArray *) aButtons
+                        withSubject:(NSString*) subject
+                      andCallbackId:(NSString *)aCallbackId;
 @end
