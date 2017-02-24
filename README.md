@@ -20,6 +20,7 @@
         <strong>id</strong> -&gt; int (unique)
         <strong>name</strong> -&gt; String
         <strong>isDefault</strong> -&gt; "true"/"false" ("true" if button backgroung blue | "false" if button backgroung white</pre>
+        <strong>subject</strong> -&gt; email subject for sharing
 <p><strong>Example:</strong></p>
 <pre>var onSuccess = function (res) {
 
