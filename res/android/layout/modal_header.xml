@@ -20,8 +20,8 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="35dp"
+                android:layout_width="52dp"
+                android:layout_height="match_parent"
                 android:src="@drawable/back_button" />
 
         </RelativeLayout>

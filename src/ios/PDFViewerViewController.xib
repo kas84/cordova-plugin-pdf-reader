@@ -69,12 +69,12 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgK-ee-Vj6" userLabel="BackButton">
-                            <rect key="frame" x="8" y="25" width="30" height="30"/>
+                            <rect key="frame" x="8" y="22.5" width="35" height="35"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="c3Z-Ws-miL">
+                                <constraint firstAttribute="width" constant="35" id="c3Z-Ws-miL">
                                     <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                                 </constraint>
-                                <constraint firstAttribute="height" constant="30" id="z4N-XT-CoE">
+                                <constraint firstAttribute="height" constant="35" id="z4N-XT-CoE">
                                     <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                                 </constraint>
                             </constraints>
