@@ -68,7 +68,7 @@
                                 <action selector="share" destination="-1" eventType="touchUpInside" id="vnh-i1-IB4"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgK-ee-Vj6" userLabel="BackButton">
+                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgK-ee-Vj6" userLabel="BackButton">
                             <rect key="frame" x="8" y="22.666666666666671" width="35" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="35" id="c3Z-Ws-miL"/>
