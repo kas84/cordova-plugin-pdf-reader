@@ -56,6 +56,7 @@ public class PdfActivity extends AppCompatActivity
   private int btnId;
 
   private boolean btnPressed;
+  private boolean btnBackPressed;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -78,7 +79,8 @@ public class PdfActivity extends AppCompatActivity
     ListBtnView.add(btn3);
 
     btnPressed = false;
-
+    btnBackPressed = false;
+      
     if(btnsList.size() == 0){
       footerBar.setVisibility(View.GONE);
     }else {
@@ -94,6 +96,7 @@ public class PdfActivity extends AppCompatActivity
           @Override
           public void onClick(View view) {
             btnId = finalI;
+            btnBackPressed = false;
             btnPressed = true;
             finish();
           }
@@ -118,6 +121,7 @@ public class PdfActivity extends AppCompatActivity
 
     headerBackButton.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
+        btnBackPressed = true;
         finish();
       }
     });
@@ -154,14 +158,24 @@ public class PdfActivity extends AppCompatActivity
   @Override public void onPageChanged(int page, int pageCount) {
 
   }
+            
+  @Override
+  public void onBackPressed() {
+    btnBackPressed = true;
+    super.onBackPressed();
+  }
 
   @Override
   protected void onStop() {
-    if(btnPressed)
-      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, String.valueOf(btnsList.get(btnId).getId())));
-    else
-      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "-1"));
-
+    if(btnPressed) // normal button events
+       callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, String.valueOf(btnsList.get(btnId).getId())));
+    else if(btnBackPressed) //exiting activity with backbutton
+       callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "-1"));
+    else {  //activity went into background (unknown reasons for now)
+        PluginResult result = new PluginResult(PluginResult.Status.OK, "-2");
+        result.setKeepCallback(true);
+        callbackContext.sendPluginResult(result);
+    }
     super.onStop();
   }
 
