@@ -165,16 +165,21 @@
 
     [self dismissViewControllerAnimated:YES
                              completion:^{
-    [self removeFromParentViewController];
-
-        if(!self.plugin) return;
-
-        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                                              messageAsString:@"-1"];
-        [pluginResult setKeepCallbackAsBool:NO];
-        [self.plugin.commandDelegate sendPluginResult:pluginResult
-                                           callbackId:self.callbackId];
-    }];
+                                 NSURL *resourceUrl = self.webView.request.URL;
+                                 NSError *errorBlock;
+                                 if([[NSFileManager defaultManager] removeItemAtURL:resourceUrl error:&errorBlock] == NO) {
+                                     NSLog(@"error deleting file %@", errorBlock.localizedDescription);
+                                 }
+                                 [self removeFromParentViewController];
+                                 
+                                 if(!self.plugin) return;
+                                 
+                                 CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                                                   messageAsString:@"-1"];
+                                 [pluginResult setKeepCallbackAsBool:NO];
+                                 [self.plugin.commandDelegate sendPluginResult:pluginResult
+                                                                    callbackId:self.callbackId];
+                             }];
 }
 
 - (IBAction)share
@@ -189,13 +194,6 @@
     {
         [activityViewController setValue:self.subject forKey:@"subject"];
     }
-    [activityViewController setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
-        NSError *errorBlock;
-        if([[NSFileManager defaultManager] removeItemAtURL:resourceUrl error:&errorBlock] == NO) {
-            NSLog(@"error deleting file %@", errorBlock.localizedDescription);
-            return;
-        }
-    }];
 
     [self presentViewController:activityViewController
                        animated:YES
@@ -215,6 +213,11 @@
 
     [self dismissViewControllerAnimated:YES
                              completion:^{
+                                 NSURL *resourceUrl = self.webView.request.URL;
+                                 NSError *errorBlock;
+                                 if([[NSFileManager defaultManager] removeItemAtURL:resourceUrl error:&errorBlock] == NO) {
+                                     NSLog(@"error deleting file %@", errorBlock.localizedDescription);
+                                 }
                                  [self removeFromParentViewController];
 
                                  if(!self.plugin) return;
