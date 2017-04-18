@@ -167,15 +167,15 @@ public class PdfActivity extends AppCompatActivity
 
   @Override
   protected void onStop() {
-    if(btnPressed) // normal button events
+      if(btnPressed){ // normal button events
        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, String.valueOf(btnsList.get(btnId).getId())));
-    else if(btnBackPressed) //exiting activity with backbutton
+    }else if(btnBackPressed){ //exiting activity with backbutton
        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "-1"));
-    else {  //activity went into background (unknown reasons for now)
+    }/*else {  //activity went into background (unknown reasons for now)
         PluginResult result = new PluginResult(PluginResult.Status.OK, "-2");
         result.setKeepCallback(true);
         callbackContext.sendPluginResult(result);
-    }
+    }*/
     super.onStop();
   }
 
