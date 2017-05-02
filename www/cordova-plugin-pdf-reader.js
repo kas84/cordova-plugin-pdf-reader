@@ -1,4 +1,3 @@
-cordova.define("cordova-plugin-pdf-reader.cordova-plugin-pdf-reader", function(require, exports, module) {
 var argscheck = require('cordova/argscheck'),
                exec = require('cordova/exec');
 
@@ -15,4 +14,3 @@ var pdfreader = {
 
 module.exports = pdfreader;
 
-});
