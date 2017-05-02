@@ -11,6 +11,7 @@
 
 #define CUSTOM_ORANGE_COLOR [UIColor colorWithRed:255.0/255.0 green:102/255.0 blue:0/255.0 alpha:1]
 #define CUSTOM_BLUE_COLOR [UIColor colorWithRed:0/255.0 green:0/255.0 blue:83/255.0 alpha:1]
+#define CUSTOM_BLUE_COLOR_DISABLED [UIColor colorWithRed:0.40 green:0.40 blue:0.59 alpha:1.00]
 
 @interface PDFViewerViewController ()
 
@@ -29,6 +30,7 @@
 @property(strong, nonatomic) NSString *fileString;
 @property(strong, nonatomic) NSString *viewTitle;
 @property(strong, nonatomic) NSString *subject;
+@property(strong, nonatomic) NSString *textDescription;
 
 @property(strong, nonatomic) CDVPlugin *plugin;
 @property(strong, nonatomic) NSString *callbackId;
@@ -45,6 +47,7 @@
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *footerHeight;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblDescription;
 @property (weak, nonatomic) IBOutlet UIButton *btn1;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btn1Width;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btn1WidthEqualsBtn2Constraint;
@@ -57,6 +60,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btn2Leading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btn1Leading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *trailing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintHeightDescription;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintCenterButtons;
 
 @property (strong, nonatomic) NSArray* arrayButtons;
 
@@ -66,12 +71,13 @@
 
 #pragma mark - Convenience methods
 
-+ (instancetype) initWithFileString:(NSString *)fileString
-                           andTitle:(NSString *)aTitle
-                         withPlugin:(CDVPlugin *)aPlugin
-                        withButtons:(NSArray *) aButtons
++ (instancetype) initWithFileString:(NSString*) fileString
+                           andTitle:(NSString*) aTitle
+                         withPlugin:(CDVPlugin*) aPlugin
+                        withButtons:(NSArray*) aButtons
                         withSubject:(NSString*) subject
-                      andCallbackId:(NSString *)aCallbackId
+                    withDescription:(NSString*) description
+                      andCallbackId:(NSString*) aCallbackId
 {
     PDFViewerViewController *vc = [[PDFViewerViewController alloc] init];
     if(vc)
@@ -82,6 +88,7 @@
         vc.buttons = aButtons;
         vc.subject = subject;
         vc.callbackId = aCallbackId;
+        vc.textDescription = description;
     }
 
     return vc;
@@ -132,9 +139,25 @@
     self.arrayButtons = [NSArray arrayWithObjects: self.btn1,self.btn2,self.btn3, nil];
     [self setMyButtons:self.buttons];
 
+    if(self.textDescription)
+    {
+        self.lblDescription.text = self.textDescription;
+        self.constraintCenterButtons.active = FALSE;
+        self.footerHeight.constant = self.footerHeight.constant + self.lblDescription.frame.size.height;
+    }
+    else
+    {
+        self.lblDescription.hidden = YES;
+        self.footerHeight.constant = self.footerHeight.constant - self.lblDescription.frame.size.height;
+        [self.lblDescription removeFromSuperview];
+    }
+    
     self.constraintHeightHeader.constant = self.constraintHeightHeader.constant + [UIApplication sharedApplication].statusBarFrame.size.height;
     self.constraintCenterBack.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2;
+    
     [self.view setNeedsUpdateConstraints];
+    
+    self.webView.scrollView.delegate = self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -245,6 +268,34 @@
     self.isWebViewLoaded = YES;
 }
 
+#pragma mark - UIScrollViewDelegate Protocol
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if(scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height))
+    {
+        //Bottom reached, activate any needsScrolltToEnd Buttons
+        int i = 0;
+        for (NSDictionary *buttonSettings in self.buttons)
+        {
+            UIButton* currentButton = self.arrayButtons[i];
+            NSString* needsScrolltoEnd = buttonSettings[@"needScrollToEnd"];
+            if([needsScrolltoEnd isEqualToString:@"true"])
+            {
+                currentButton.enabled = YES;
+                [currentButton setBackgroundColor:CUSTOM_BLUE_COLOR];
+                [[currentButton layer] setBorderColor:[CUSTOM_BLUE_COLOR CGColor]];
+            }
+            
+            ++i;
+        }
+    }
+    if(scrollView.contentOffset.y <= 0.0)
+    {
+        //Top reached
+        //Do nothing
+    }
+}
+
 #pragma mark - Utilities
 - (void)setupTitleHeader
 {
@@ -262,7 +313,7 @@
     [self.titleLbl setFont:[UIFont fontWithName:@"TradeGothicBPI Bold" size:17]];
 }
 
--(void) showButtonsFromListSize: (int) size
+-(void) showButtonsFromListSize: (long) size
 {
     switch (size) {
         case 0:
@@ -316,9 +367,19 @@
             [currentBtn setTitleColor:[UIColor whiteColor ] forState:UIControlStateNormal];
             currentBtn.backgroundColor = btnBackgroundColor;
         }
-        int btnID = [buttonSettings[@"id"] integerValue];
+        long btnID = [buttonSettings[@"id"] longValue];
         currentBtn.tag = btnID;
         [currentBtn setTitle:name forState:UIControlStateNormal];
+        
+        NSString *needsScrollToEnd = buttonSettings[@"needScrollToEnd"];
+        [buttonSettings setValue:needsScrollToEnd forKey:@"needScrollToEnd"];
+        if([needsScrollToEnd isEqualToString:@"true"])
+        {
+            currentBtn.enabled = NO;
+            [currentBtn setBackgroundColor:CUSTOM_BLUE_COLOR_DISABLED];
+            [[currentBtn layer] setBorderColor:[CUSTOM_BLUE_COLOR_DISABLED CGColor]];
+        }
+        
         ++i;
     }
 }

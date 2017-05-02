@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,12 +29,15 @@
                 <outlet property="btn3Width" destination="tqN-39-xts" id="kai-2d-Y5c"/>
                 <outlet property="btn3WidthEqualsBtn1Constraint" destination="0MI-Be-PsE" id="nW7-5F-48P"/>
                 <outlet property="constraintCenterBack" destination="2ZN-GJ-hpy" id="VQb-x2-zMk"/>
+                <outlet property="constraintCenterButtons" destination="Xsl-Ly-8DW" id="AES-4u-64a"/>
                 <outlet property="constraintCenterShare" destination="Nzx-Zh-H4w" id="m6u-m4-0kY"/>
                 <outlet property="constraintCenterTitle" destination="kyT-Br-2Na" id="nAq-I2-eBg"/>
+                <outlet property="constraintHeightDescription" destination="CbP-gy-Bmx" id="BWC-W6-0g0"/>
                 <outlet property="constraintHeightHeader" destination="ziw-B2-Bda" id="bLF-9K-D2C"/>
                 <outlet property="footerHeight" destination="BsH-vD-gTG" id="vbf-1J-mRR"/>
                 <outlet property="footerView" destination="dxo-Ps-wHF" id="wkY-61-y5C"/>
                 <outlet property="header" destination="DnW-0D-Z5V" id="agd-yw-Xbh"/>
+                <outlet property="lblDescription" destination="qRl-0e-e4u" id="Zo5-uC-u5z"/>
                 <outlet property="loadingIndicator" destination="5qU-89-xw0" id="cYc-kb-uty"/>
                 <outlet property="shareBtn" destination="ads-TC-Ym2" id="mOn-hT-exS"/>
                 <outlet property="titleLbl" destination="iHu-Vx-Agr" id="XBY-n5-8tp"/>
@@ -51,7 +55,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iHu-Vx-Agr" userLabel="Title">
-                            <rect key="frame" x="189" y="29.999999999999996" width="36.666666666666657" height="20.666666666666661"/>
+                            <rect key="frame" x="189" y="30" width="37" height="21"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -69,7 +73,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgK-ee-Vj6" userLabel="BackButton">
-                            <rect key="frame" x="8" y="22.666666666666671" width="35" height="35"/>
+                            <rect key="frame" x="8" y="23" width="35" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="35" id="c3Z-Ws-miL"/>
                                 <constraint firstAttribute="height" constant="35" id="z4N-XT-CoE"/>
@@ -99,14 +103,14 @@
                     <rect key="frame" x="197" y="358" width="20" height="20"/>
                 </activityIndicatorView>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gvi-M6-emp">
-                    <rect key="frame" x="0.0" y="60" width="414" height="596"/>
+                    <rect key="frame" x="0.0" y="60" width="414" height="568"/>
                     <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="Qdw-3f-gJF"/>
                     </connections>
                 </webView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxo-Ps-wHF" userLabel="Footer View">
-                    <rect key="frame" x="0.0" y="656" width="414" height="80"/>
+                    <rect key="frame" x="0.0" y="628" width="414" height="108"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiP-Te-TZU" userLabel="Line">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
@@ -115,32 +119,8 @@
                                 <constraint firstAttribute="height" constant="1" id="GTq-1Z-9qV"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUL-Tn-SiX" userLabel="Btn1">
-                            <rect key="frame" x="20" y="20" width="108" height="40"/>
-                            <accessibility key="accessibilityConfiguration">
-                                <accessibilityTraits key="traits" button="YES" notEnabled="YES"/>
-                            </accessibility>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="108" id="yZm-wP-KRK"/>
-                                <constraint firstAttribute="height" constant="40" id="yhD-d4-Qeh"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="14"/>
-                            <state key="normal" title="Aceito">
-                                <color key="titleColor" red="0.0" green="0.0" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <state key="selected" image="bt_naceito_selected"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="2"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="buttonAction:" destination="-1" eventType="touchUpInside" id="YJz-em-rcm"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7p-Uk-o9a" userLabel="Btn2">
-                            <rect key="frame" x="153" y="20" width="108" height="40"/>
+                            <rect key="frame" x="153" y="34" width="108" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="108" id="aRo-er-yHk" userLabel="Btn2 Width"/>
                                 <constraint firstAttribute="height" constant="40" id="zHO-5k-a8g"/>
@@ -161,7 +141,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hg2-Xe-HuG" userLabel="Btn3">
-                            <rect key="frame" x="286" y="20" width="108" height="40"/>
+                            <rect key="frame" x="286" y="34" width="108" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="PjC-sA-lcn"/>
                                 <constraint firstAttribute="width" constant="108" id="tqN-39-xts" userLabel="Btn3 Width"/>
@@ -189,27 +169,71 @@
                                 <action selector="buttonAction:" destination="-1" eventType="touchUpInside" id="g0b-Gq-ba3"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="901" verticalCompressionResistancePriority="901" text="Descrição default" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRl-0e-e4u">
+                            <rect key="frame" x="20" y="10" width="374" height="14"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="CbP-gy-Bmx"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="14"/>
+                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUL-Tn-SiX" userLabel="Btn1">
+                            <rect key="frame" x="20" y="34" width="108" height="40"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" button="YES" notEnabled="YES"/>
+                            </accessibility>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="108" id="yZm-wP-KRK"/>
+                                <constraint firstAttribute="height" constant="40" id="yhD-d4-Qeh"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="14"/>
+                            <state key="normal" title="Aceito">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" image="bt_naceito_selected"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="buttonAction:" destination="-1" eventType="touchUpInside" id="YJz-em-rcm"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="GUL-Tn-SiX" firstAttribute="width" secondItem="hg2-Xe-HuG" secondAttribute="width" id="0MI-Be-PsE" userLabel="Btn1 Width Equals Btn3 Constraint"/>
                         <constraint firstAttribute="trailing" secondItem="PiP-Te-TZU" secondAttribute="trailing" id="71T-N8-4tL"/>
-                        <constraint firstAttribute="height" constant="80" id="BsH-vD-gTG"/>
-                        <constraint firstItem="GUL-Tn-SiX" firstAttribute="centerY" secondItem="dxo-Ps-wHF" secondAttribute="centerY" id="Djp-ts-Ehh"/>
+                        <constraint firstItem="hg2-Xe-HuG" firstAttribute="top" secondItem="qRl-0e-e4u" secondAttribute="bottom" constant="10" id="8pG-lB-IOz"/>
+                        <constraint firstItem="hg2-Xe-HuG" firstAttribute="centerY" secondItem="X7p-Uk-o9a" secondAttribute="centerY" id="B2W-wg-6mR"/>
+                        <constraint firstItem="X7p-Uk-o9a" firstAttribute="top" secondItem="qRl-0e-e4u" secondAttribute="bottom" constant="10" id="BWe-Kk-hAT"/>
+                        <constraint firstItem="GUL-Tn-SiX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="qRl-0e-e4u" secondAttribute="bottom" constant="10" id="BXl-85-SVV"/>
+                        <constraint firstAttribute="height" constant="108" id="BsH-vD-gTG"/>
+                        <constraint firstItem="GUL-Tn-SiX" firstAttribute="centerY" secondItem="dxo-Ps-wHF" secondAttribute="centerY" priority="900" id="Djp-ts-Ehh"/>
                         <constraint firstItem="X7p-Uk-o9a" firstAttribute="width" secondItem="GUL-Tn-SiX" secondAttribute="width" id="EMJ-WH-psJ" userLabel="Btn2 Width Equals Btn1 Constraint"/>
                         <constraint firstAttribute="trailing" secondItem="hg2-Xe-HuG" secondAttribute="trailing" constant="20" id="FFB-XB-obf"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="X7p-Uk-o9a" secondAttribute="bottom" constant="10" id="MPZ-9h-2Sz"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hg2-Xe-HuG" secondAttribute="bottom" constant="10" id="NVL-C3-BHJ"/>
                         <constraint firstItem="PiP-Te-TZU" firstAttribute="top" secondItem="dxo-Ps-wHF" secondAttribute="top" id="OKl-0r-8MB"/>
                         <constraint firstItem="PiP-Te-TZU" firstAttribute="leading" secondItem="dxo-Ps-wHF" secondAttribute="leading" id="Xsi-5H-k0g"/>
                         <constraint firstItem="X7p-Uk-o9a" firstAttribute="baseline" secondItem="GUL-Tn-SiX" secondAttribute="baseline" id="Xsl-Ly-8DW" userLabel="Btn3.baseline = Btn1.baseline"/>
-                        <constraint firstItem="hg2-Xe-HuG" firstAttribute="centerY" secondItem="dxo-Ps-wHF" secondAttribute="centerY" id="a8Y-Ij-X3c" userLabel="Btn2.centerY = centerY"/>
+                        <constraint firstItem="qRl-0e-e4u" firstAttribute="centerX" secondItem="dxo-Ps-wHF" secondAttribute="centerX" id="bcb-Ha-uJg"/>
                         <constraint firstItem="hg2-Xe-HuG" firstAttribute="leading" secondItem="X7p-Uk-o9a" secondAttribute="trailing" constant="25" id="eNT-YX-koz" userLabel="Btn3.leading = Btn2.trailing + 20"/>
                         <constraint firstItem="X7p-Uk-o9a" firstAttribute="leading" secondItem="GUL-Tn-SiX" secondAttribute="trailing" constant="25" id="fnH-JN-dmR" userLabel="Btn2.leading = Btn1.trailing + 20"/>
+                        <constraint firstItem="qRl-0e-e4u" firstAttribute="top" secondItem="dxo-Ps-wHF" secondAttribute="top" constant="10" id="kpC-Yg-TZV"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="GUL-Tn-SiX" secondAttribute="bottom" constant="10" id="tB4-hv-tiG"/>
                         <constraint firstItem="GUL-Tn-SiX" firstAttribute="leading" secondItem="dxo-Ps-wHF" secondAttribute="leading" constant="20" id="uRi-RL-Qcb"/>
+                        <constraint firstItem="qRl-0e-e4u" firstAttribute="leading" secondItem="dxo-Ps-wHF" secondAttribute="leading" constant="20" id="vjx-48-1R9"/>
+                        <constraint firstAttribute="trailing" secondItem="qRl-0e-e4u" secondAttribute="trailing" constant="20" id="zGG-k4-1T1"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="dxo-Ps-wHF" firstAttribute="top" secondItem="Gvi-M6-emp" secondAttribute="bottom" priority="900" constant="80" id="29B-3G-Asu"/>
                 <constraint firstItem="Gvi-M6-emp" firstAttribute="top" secondItem="DnW-0D-Z5V" secondAttribute="bottom" id="5Kn-sZ-xgI"/>
                 <constraint firstAttribute="trailing" secondItem="Gvi-M6-emp" secondAttribute="trailing" id="CIJ-zV-J7W"/>
                 <constraint firstItem="5qU-89-xw0" firstAttribute="centerY" secondItem="GDv-Ls-VbD" secondAttribute="centerY" id="Kwn-qb-VmE"/>
@@ -229,7 +253,7 @@
         </view>
     </objects>
     <resources>
-        <image name="back.png" width="20" height="20"/>
+        <image name="back.png" width="110" height="110"/>
         <image name="bt_naceito_selected" width="16" height="16"/>
         <image name="share.png" width="50" height="50"/>
     </resources>
