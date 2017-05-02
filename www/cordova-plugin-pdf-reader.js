@@ -1,10 +1,11 @@
+cordova.define("cordova-plugin-pdf-reader.cordova-plugin-pdf-reader", function(require, exports, module) {
 var argscheck = require('cordova/argscheck'),
                exec = require('cordova/exec');
 
 var pdfreader = {
 
-    openPdf: function(title,url,buttonsArray,successCallback, errorCallback, subject){
-        exec(successCallback, errorCallback, "PDFViewer", "openPdf", [title,url,buttonsArray, subject]);
+    openPdf: function(title,url,buttonsArray,successCallback, errorCallback, subject, description){
+        exec(successCallback, errorCallback, "PDFViewer", "openPdf", [title,url,buttonsArray, subject, description]);
     },
 
 	closePdf: function(successCallback, errorCallback) {
@@ -13,3 +14,5 @@ var pdfreader = {
 };
 
 module.exports = pdfreader;
+
+});

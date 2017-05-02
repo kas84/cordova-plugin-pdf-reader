@@ -42,12 +42,15 @@ public class PdfActivity extends AppCompatActivity
 
   private Button btn3;
 
+  private TextView warningText;
+
   private List<Button> ListBtnView = new ArrayList<Button>();
 
   private TextView headerTitle;
 
   private String title;
   private String subject;
+  private String disabledDescription;
 
   private PdfUtils pdfUtils;
 
@@ -57,6 +60,7 @@ public class PdfActivity extends AppCompatActivity
 
   private boolean btnPressed;
   private boolean btnBackPressed;
+  private boolean hasReachedEndOfFile = false;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -67,6 +71,10 @@ public class PdfActivity extends AppCompatActivity
     String pdf = getIntent().getStringExtra("file");
     title = getIntent().getStringExtra("title");
     subject = getIntent().getStringExtra("subject");
+    disabledDescription = getIntent().getStringExtra("disabledDescription");
+
+
+    warningText = (TextView) findViewById(getIdResourceByName("warning_disabled_btns"));
 
     btn1 = (Button) findViewById(getIdResourceByName("btn1"));
     btn2 = (Button) findViewById(getIdResourceByName("btn2"));
@@ -84,13 +92,24 @@ public class PdfActivity extends AppCompatActivity
     if(btnsList.size() == 0){
       footerBar.setVisibility(View.GONE);
     }else {
+      if(disabledDescription != null){
+        warningText.setText(disabledDescription);
+        warningText.setVisibility(View.VISIBLE);
+      }
+
       for (int i = 0; i < btnsList.size(); i++) {
         ListBtnView.get(i).setVisibility(View.VISIBLE);
         ListBtnView.get(i).setText(btnsList.get(i).getName());
         if (!btnsList.get(i).isDefaulf().equals("true")) {
           ListBtnView.get(i).setBackgroundResource(getDrawableResourceByName("btn_unchecked"));
-          ListBtnView.get(i).setTextColor(Color.parseColor("#000053"));
+        }else{
+          ListBtnView.get(i).setTextColor(Color.WHITE);
         }
+
+        if (!btnsList.get(i).isDisabledUntilEOF().equals("true")) {
+          ListBtnView.get(i).setEnabled(false);
+        }
+
         final int finalI = i;
         ListBtnView.get(i).setOnClickListener(new View.OnClickListener() {
           @Override
@@ -156,7 +175,14 @@ public class PdfActivity extends AppCompatActivity
   }
 
   @Override public void onPageChanged(int page, int pageCount) {
+    if(hasReachedEndOfFile) return;
 
+    if(page == pageCount-1){
+      hasReachedEndOfFile = true;
+      for (int i = 0; i < ListBtnView.size(); i++) {
+        ListBtnView.get(i).setEnabled(true);
+      }
+    }
   }
             
   @Override

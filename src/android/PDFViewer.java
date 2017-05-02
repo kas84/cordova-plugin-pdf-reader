@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PDFViewer extends CordovaPlugin {
-
+  
   private int READ_EXTERNAL = 0;
 
   public static final String READ = Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -40,6 +40,7 @@ public class PDFViewer extends CordovaPlugin {
     String url = "";
     String title = "";
     String subject = null;
+    String disabledDescription = null;
     JSONArray btnsArray = null;
 
     if ("openPdf".equals(action)) {
@@ -48,10 +49,15 @@ public class PDFViewer extends CordovaPlugin {
         url = args.getString(1);
         btnsArray = args.getJSONArray(2);
         if(args.length() > 3){
-            subject = args.getString(3);
-            if(subject != null && subject.equals("null")){
-                subject = null;
-            }
+          subject = args.getString(3);
+          if(subject != null && subject.equals("null")){
+            subject = null;
+          }
+
+          disabledDescription = args.getString(4);
+          if(disabledDescription != null && disabledDescription.equals("null")){
+            disabledDescription = null;
+          }
         }
         btnsList.clear();
 
@@ -65,8 +71,9 @@ public class PDFViewer extends CordovaPlugin {
           int id = jsonobject.getInt("id");
           String name = jsonobject.getString("name");
           String isDefault = jsonobject.getString("isDefault");
+          String isDisabledUntilEOF = jsonobject.getString("needScrollToEnd");
 
-          BtnObject button = new BtnObject(id,name,isDefault);
+          BtnObject button = new BtnObject(id,name,isDefault,isDisabledUntilEOF);
           btnsList.add(button);
         }
 
@@ -74,7 +81,7 @@ public class PDFViewer extends CordovaPlugin {
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, ""));
       }
       try {
-        this.openPdf(url, title, subject);
+        this.openPdf(url, title, subject, disabledDescription);
       } catch (Exception e) {
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Failed to open pdf"));
       }
@@ -92,7 +99,7 @@ public class PDFViewer extends CordovaPlugin {
     return false;  // Returning false results in a "MethodNotFound" error.
   }
 
-  private void openPdf(String url, String title, String subject) {
+  private void openPdf(String url, String title, String subject, String disabledDescription) {
     if (!PermissionHelper.hasPermission(this, READ)) {
       PermissionHelper.requestPermissions(this, READ_EXTERNAL, new String[] {READ, WRITE});
     } else {
@@ -100,6 +107,7 @@ public class PDFViewer extends CordovaPlugin {
       intent.putExtra("file", url);
       intent.putExtra("title", title);
       intent.putExtra("subject", (subject != null)? subject: title);
+      intent.putExtra("disabledDescription", disabledDescription);
       cordova.getActivity().startActivity(intent);
     }
   }

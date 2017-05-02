@@ -6,5 +6,6 @@
     <color name="transparent">#00000000</color>
     <color name="white">#ffffff</color>
     <color name="blue">#000053</color>
+    <color name="grayed_out">#505072</color>
 
 </resources>

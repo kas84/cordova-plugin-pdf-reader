@@ -36,6 +36,7 @@
       <source-file src="src/android/PdfActivity.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
       <source-file src="src/android/PdfUtils.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
       <source-file src="src/android/BtnObject.java" target-dir="src/org/apache/cordova/pdfpluginmanager" />
+      <source-file src="res/android/color/btn_text.xml" target-dir="res/color" />
       <source-file src="res/android/drawable/btn_selector.xml" target-dir="res/drawable" />
       <source-file src="res/android/drawable/btn_unchecked.xml" target-dir="res/drawable" />
       <source-file src="res/android/drawable/back_button.png" target-dir="res/drawable" />

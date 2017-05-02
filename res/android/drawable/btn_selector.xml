@@ -1,13 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
-    <corners
-        android:radius="3dp"
-    />
-    <solid android:color="@color/blue" />
-    <padding
-        android:left="0dp"
-        android:top="0dp"
-        android:right="0dp"
-        android:bottom="0dp"
-    />
-</shape>
+
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_enabled="false" >
+        <shape>
+            <corners
+                android:radius="3dp"
+                />
+            <solid android:color="@color/grayed_out" />
+            <padding
+                android:left="0dp"
+                android:top="0dp"
+                android:right="0dp"
+                android:bottom="0dp"
+                />
+        </shape>
+    </item>
+
+    <item android:state_pressed="true" >
+        <shape>
+            <corners
+                android:radius="3dp"
+                />
+            <solid android:color="@color/blue" />
+            <padding
+                android:left="0dp"
+                android:top="0dp"
+                android:right="0dp"
+                android:bottom="0dp"
+                />
+        </shape>
+    </item>
+
+    <item android:state_focused="true" >
+        <shape>
+            <corners
+                android:radius="3dp"
+                />
+            <solid android:color="@color/blue" />
+            <padding
+                android:left="0dp"
+                android:top="0dp"
+                android:right="0dp"
+                android:bottom="0dp"
+                />
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <corners
+                android:radius="3dp"
+                />
+            <solid android:color="@color/blue" />
+            <padding
+                android:left="0dp"
+                android:top="0dp"
+                android:right="0dp"
+                android:bottom="0dp"
+                />
+        </shape>
+    </item>
+</selector>
+

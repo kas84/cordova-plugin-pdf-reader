@@ -24,51 +24,69 @@
             android:layout_height="match_parent"/>
     </RelativeLayout>
 
-    <LinearLayout android:id="@+id/footerBar"
+    <LinearLayout
+        android:id="@+id/footerBar"
         android:layout_width="match_parent"
-        android:layout_height="82dp"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:background="@color/bg_color"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:background="@color/bg_color">
 
-        <Button android:id="@+id/btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:background="@drawable/btn_selector"
+        <TextView
+            android:id="@+id/warning_disabled_btns"
             android:visibility="gone"
-            android:layout_weight="1"
-            android:text="button1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="15sp"/>
-
-        <Button android:id="@+id/btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_selector"
-            android:visibility="gone"
-            android:layout_weight="1"
-            android:text="button2"
-            android:layout_marginRight="16dp"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="15sp"/>
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:text="testing message"
+            />
 
-        <Button android:id="@+id/btn3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_selector"
-            android:visibility="gone"
-            android:layout_weight="1"
-            android:text="button3"
-            android:layout_marginRight="16dp"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="15sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <Button android:id="@+id/btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/btn_selector"
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:text="button1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textAllCaps="false"
+                android:textColor="@color/btn_text"
+                android:textSize="15sp"/>
+
+            <Button android:id="@+id/btn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_selector"
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:text="button2"
+                android:layout_marginRight="16dp"
+                android:textAllCaps="false"
+                android:textColor="@color/btn_text"
+                android:textSize="15sp"/>
+
+            <Button android:id="@+id/btn3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_selector"
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:text="button3"
+                android:layout_marginRight="16dp"
+                android:textAllCaps="false"
+                android:textColor="@color/btn_text"
+                android:textSize="15sp"/>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
