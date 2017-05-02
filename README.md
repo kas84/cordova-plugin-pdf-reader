@@ -3,7 +3,7 @@
 <h2>API Reference</h2>
 <h3>PdfReader</h3>
 <pre>PdfReader.openPdf: function(title,url,buttonsArray,successCallback, errorCallback){
-		exec(successCallback, errorCallback, "PDFViewer", "openPdf", [title,url,buttonsArray]);
+		exec(successCallback, errorCallback, "PDFViewer", "openPdf", [title,url,buttonsArray,subject,description]);
 	}
 
 
@@ -15,12 +15,14 @@
         |------&gt; 0 buttons -&gt; buttonsArray = [ ]
         |------&gt; 1 button -&gt; buttonsArray = [{"id":1,"name":"btnName","isDefault":"true"}]
         |------&gt; 2 buttons -&gt; buttonsArray = [{"id":1,"name":"btnName","isDefault":"true"},
-        				      {"id":2,"name":"btnName2","isDefault":"false"}]
+        				      {"id":2,"name":"btnName2","isDefault":"false", "needScrollToEnd":"true"}]
 
         <strong>id</strong> -&gt; int (unique)
         <strong>name</strong> -&gt; String
         <strong>isDefault</strong> -&gt; "true"/"false" ("true" if button backgroung blue | "false" if button backgroung white</pre>
-        <strong>subject</strong> -&gt; email subject for sharing
+        <strong>needScrollToEnd</strong> -&gt; If button is active only if scroll reaches bottom
+    <strong>subject</strong> -&gt; email subject for sharing
+    <strong>description</strong> -&gt; Description that appears before buttons
 <p><strong>Example:</strong></p>
 <pre>var onSuccess = function (res) {
 
@@ -34,7 +36,7 @@
 
         };
 
-PdfReader.openPdf("Title Name","iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAmUlEQVR42u3X3QqAIAwFYKGg1/auF+rnzbo1hQIZImo6j7HBuf9Q2aYyxiikKAEJSEDh6CcQIAd5S/cG+RhXp83UCxTCLL1OiGKOGphSUDNMCYhi9pqYXFBzTA6IYrYWmFQQGyYFRDGXzep15i/JBlFM7RofBHdlkI+atQcN3RhZ5tgvhivk+gG5oMVQsyz56N8g+bkKSECx3F93twfcz7kPAAAAAElFTkSuQmCC",[{"id":1,"name":"btn1","isDefault":"true"},{"id":2,"name":"btn2","isDefault":"false"}], onSuccess, onError);
+PdfReader.openPdf("Title Name","iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAmUlEQVR42u3X3QqAIAwFYKGg1/auF+rnzbo1hQIZImo6j7HBuf9Q2aYyxiikKAEJSEDh6CcQIAd5S/cG+RhXp83UCxTCLL1OiGKOGphSUDNMCYhi9pqYXFBzTA6IYrYWmFQQGyYFRDGXzep15i/JBlFM7RofBHdlkI+atQcN3RhZ5tgvhivk+gG5oMVQsyz56N8g+bkKSECx3F93twfcz7kPAAAAAElFTkSuQmCC",[{"id":1,"name":"btn1","isDefault":"true"},{"id":2,"name":"btn2","isDefault":"false"}],"Email subject", "Description before buttons.", onSuccess, onError);
  </pre>
 <p><strong>Expected Callbacks:</strong></p>
 <pre>	onSuccess:
