@@ -106,7 +106,7 @@ public class PdfActivity extends AppCompatActivity
           ListBtnView.get(i).setTextColor(Color.WHITE);
         }
 
-        if (!btnsList.get(i).isDisabledUntilEOF().equals("true")) {
+        if (btnsList.get(i).isDisabledUntilEOF() != null && btnsList.get(i).isDisabledUntilEOF().equalsIgnoreCase("true")) {
           ListBtnView.get(i).setEnabled(false);
         }
 

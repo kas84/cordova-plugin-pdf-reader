@@ -71,7 +71,10 @@ public class PDFViewer extends CordovaPlugin {
           int id = jsonobject.getInt("id");
           String name = jsonobject.getString("name");
           String isDefault = jsonobject.getString("isDefault");
-          String isDisabledUntilEOF = jsonobject.getString("needScrollToEnd");
+          String isDisabledUntilEOF = "false";
+          if(jsonobject.has("needScrollToEnd")) {
+            isDisabledUntilEOF = jsonobject.getString("needScrollToEnd");
+          }
 
           BtnObject button = new BtnObject(id,name,isDefault,isDisabledUntilEOF);
           btnsList.add(button);
