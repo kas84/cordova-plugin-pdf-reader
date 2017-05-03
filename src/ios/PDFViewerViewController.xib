@@ -28,6 +28,7 @@
                 <outlet property="btn3Leading" destination="eNT-YX-koz" id="f6W-eR-csV"/>
                 <outlet property="btn3Width" destination="tqN-39-xts" id="kai-2d-Y5c"/>
                 <outlet property="btn3WidthEqualsBtn1Constraint" destination="0MI-Be-PsE" id="nW7-5F-48P"/>
+                <outlet property="constraintButtonBottom" destination="tB4-hv-tiG" id="vM1-CP-3hz"/>
                 <outlet property="constraintCenterBack" destination="2ZN-GJ-hpy" id="VQb-x2-zMk"/>
                 <outlet property="constraintCenterButtons" destination="Xsl-Ly-8DW" id="AES-4u-64a"/>
                 <outlet property="constraintCenterShare" destination="Nzx-Zh-H4w" id="m6u-m4-0kY"/>
@@ -103,14 +104,14 @@
                     <rect key="frame" x="197" y="358" width="20" height="20"/>
                 </activityIndicatorView>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gvi-M6-emp">
-                    <rect key="frame" x="0.0" y="60" width="414" height="568"/>
+                    <rect key="frame" x="0.0" y="60" width="414" height="591"/>
                     <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="Qdw-3f-gJF"/>
                     </connections>
                 </webView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxo-Ps-wHF" userLabel="Footer View">
-                    <rect key="frame" x="0.0" y="628" width="414" height="108"/>
+                    <rect key="frame" x="0.0" y="651" width="414" height="85"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiP-Te-TZU" userLabel="Line">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
@@ -179,7 +180,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUL-Tn-SiX" userLabel="Btn1">
-                            <rect key="frame" x="20" y="34" width="108" height="40"/>
+                            <rect key="frame" x="20" y="35" width="108" height="40"/>
                             <accessibility key="accessibilityConfiguration">
                                 <accessibilityTraits key="traits" button="YES" notEnabled="YES"/>
                             </accessibility>
@@ -211,12 +212,10 @@
                         <constraint firstItem="hg2-Xe-HuG" firstAttribute="centerY" secondItem="X7p-Uk-o9a" secondAttribute="centerY" id="B2W-wg-6mR"/>
                         <constraint firstItem="X7p-Uk-o9a" firstAttribute="top" secondItem="qRl-0e-e4u" secondAttribute="bottom" constant="10" id="BWe-Kk-hAT"/>
                         <constraint firstItem="GUL-Tn-SiX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="qRl-0e-e4u" secondAttribute="bottom" constant="10" id="BXl-85-SVV"/>
-                        <constraint firstAttribute="height" constant="108" id="BsH-vD-gTG"/>
+                        <constraint firstAttribute="height" constant="85" id="BsH-vD-gTG"/>
                         <constraint firstItem="GUL-Tn-SiX" firstAttribute="centerY" secondItem="dxo-Ps-wHF" secondAttribute="centerY" priority="900" id="Djp-ts-Ehh"/>
                         <constraint firstItem="X7p-Uk-o9a" firstAttribute="width" secondItem="GUL-Tn-SiX" secondAttribute="width" id="EMJ-WH-psJ" userLabel="Btn2 Width Equals Btn1 Constraint"/>
                         <constraint firstAttribute="trailing" secondItem="hg2-Xe-HuG" secondAttribute="trailing" constant="20" id="FFB-XB-obf"/>
-                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="X7p-Uk-o9a" secondAttribute="bottom" constant="10" id="MPZ-9h-2Sz"/>
-                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hg2-Xe-HuG" secondAttribute="bottom" constant="10" id="NVL-C3-BHJ"/>
                         <constraint firstItem="PiP-Te-TZU" firstAttribute="top" secondItem="dxo-Ps-wHF" secondAttribute="top" id="OKl-0r-8MB"/>
                         <constraint firstItem="PiP-Te-TZU" firstAttribute="leading" secondItem="dxo-Ps-wHF" secondAttribute="leading" id="Xsi-5H-k0g"/>
                         <constraint firstItem="X7p-Uk-o9a" firstAttribute="baseline" secondItem="GUL-Tn-SiX" secondAttribute="baseline" id="Xsl-Ly-8DW" userLabel="Btn3.baseline = Btn1.baseline"/>
@@ -224,7 +223,7 @@
                         <constraint firstItem="hg2-Xe-HuG" firstAttribute="leading" secondItem="X7p-Uk-o9a" secondAttribute="trailing" constant="25" id="eNT-YX-koz" userLabel="Btn3.leading = Btn2.trailing + 20"/>
                         <constraint firstItem="X7p-Uk-o9a" firstAttribute="leading" secondItem="GUL-Tn-SiX" secondAttribute="trailing" constant="25" id="fnH-JN-dmR" userLabel="Btn2.leading = Btn1.trailing + 20"/>
                         <constraint firstItem="qRl-0e-e4u" firstAttribute="top" secondItem="dxo-Ps-wHF" secondAttribute="top" constant="10" id="kpC-Yg-TZV"/>
-                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="GUL-Tn-SiX" secondAttribute="bottom" constant="10" id="tB4-hv-tiG"/>
+                        <constraint firstAttribute="bottom" secondItem="GUL-Tn-SiX" secondAttribute="bottom" constant="10" id="tB4-hv-tiG"/>
                         <constraint firstItem="GUL-Tn-SiX" firstAttribute="leading" secondItem="dxo-Ps-wHF" secondAttribute="leading" constant="20" id="uRi-RL-Qcb"/>
                         <constraint firstItem="qRl-0e-e4u" firstAttribute="leading" secondItem="dxo-Ps-wHF" secondAttribute="leading" constant="20" id="vjx-48-1R9"/>
                         <constraint firstAttribute="trailing" secondItem="qRl-0e-e4u" secondAttribute="trailing" constant="20" id="zGG-k4-1T1"/>

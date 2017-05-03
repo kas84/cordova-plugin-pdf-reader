@@ -62,6 +62,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *trailing;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintHeightDescription;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintCenterButtons;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintButtonBottom;
 
 @property (strong, nonatomic) NSArray* arrayButtons;
 
@@ -142,11 +143,27 @@
     if(self.textDescription)
     {
         self.lblDescription.text = self.textDescription;
+        [self.lblDescription sizeToFit];
+        NSInteger numberOfLines = floor(ceilf(CGRectGetHeight(self.lblDescription.frame)) / self.lblDescription.font.lineHeight);
+        float height = 0;
+        if(numberOfLines == 1)
+        {
+            height = 0;
+        }
+        else if(numberOfLines == 2)
+        {
+            height = self.lblDescription.frame.size.height;
+        }
+        else if(numberOfLines >= 3)
+        {
+            height = self.lblDescription.frame.size.height;
+        }
         self.constraintCenterButtons.active = FALSE;
-        self.footerHeight.constant = self.footerHeight.constant + self.lblDescription.frame.size.height;
+        self.footerHeight.constant = self.footerHeight.constant + height;
     }
     else
     {
+        self.constraintButtonBottom.active = FALSE;
         self.lblDescription.hidden = YES;
         self.footerHeight.constant = self.footerHeight.constant - self.lblDescription.frame.size.height;
         [self.lblDescription removeFromSuperview];
