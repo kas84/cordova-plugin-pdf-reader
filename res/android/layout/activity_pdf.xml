@@ -7,11 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".PdfActivity">
-    <include
-        android:id="@+id/pdf_layout_header"
-        layout="@layout/modal_header"
-        android:layout_width="match_parent"
-        android:layout_height="52dp" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -91,4 +87,25 @@
                 android:textSize="15sp"/>
         </LinearLayout>
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarLoadingFile"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/header_orange"
+        android:layout_width="80px"
+        android:layout_height="80px"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
+    <include
+        android:id="@+id/pdf_layout_header"
+        layout="@layout/modal_header"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

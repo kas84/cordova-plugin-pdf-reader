@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
@@ -17,7 +18,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -135,6 +139,18 @@ public class PdfUtils{
     }
     return file;
   }
+
+
+
+  /**
+   * Download and Save file.
+   *
+   */
+  public void downloadAndSaveFile(Context mContext, String fileName, String url, IDownloadCallback callback) {
+    new DownloadTask(mContext, fileName, callback).execute(url);
+  }
+
+
 
   /**
    * Convert String to byte array.
@@ -320,4 +336,132 @@ public class PdfUtils{
       return false;
     }
   }
+
+
+
+
+
+
+  public interface IDownloadCallback{
+    void callback(File file);
+  }
+
+  private class DownloadTask extends AsyncTask<String, Integer, String> {
+
+    private Context context;
+    private String fileName;
+    private File file = null;
+    private IDownloadCallback callback;
+
+    public DownloadTask(Context context, String fileName, IDownloadCallback callback) {
+      this.context = context;
+      this.fileName = fileName;
+      this.callback = callback;
+    }
+
+    @Override
+    protected String doInBackground(String... sUrl) {
+      InputStream input;
+      HttpURLConnection connection = null;
+      try {
+        URL url = new URL(sUrl[0]);
+        connection = (HttpURLConnection) url.openConnection();
+        connection.connect();
+
+        // expect HTTP 200 OK, so we don't mistakenly save error report
+        // instead of the file
+        if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+          return "Server returned HTTP " + connection.getResponseCode()
+                  + " " + connection.getResponseMessage();
+        }
+
+        // this will be useful to display download percentage
+        // might be -1: server did not report the length
+        int fileLength = connection.getContentLength();
+
+        // download the file
+        input = connection.getInputStream();
+
+        switch (mMode) {
+          case EXTERNAL:
+            if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+              Toast.makeText(context, "Cartão SD não encontrado.", Toast.LENGTH_SHORT).show();
+            } else {
+              try {
+                file = new File(cacheDir, fileName);
+                OutputStream out = new FileOutputStream(file);
+                byte data[] = new byte[4096];
+                long total = 0;
+                int count;
+                while ((count = input.read(data)) != -1) {
+                  // allow canceling with back button
+                  if (isCancelled()) {
+                    input.close();
+                    return null;
+                  }
+                  total += count;
+                  // publishing the progress....
+                  if (fileLength > 0) // only if total length is known
+                    publishProgress((int) (total * 100 / fileLength));
+                  out.write(data, 0, count);
+                }
+                existsPdf = true;
+              } catch (IOException e) {
+                Log.e("PDF", "Falhou o processo.");
+              }
+            }
+            break;
+
+          case INTERNAL:
+            try {
+              FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+              byte data[] = new byte[4096];
+              long total = 0;
+              int count;
+              while ((count = input.read(data)) != -1) {
+                // allow canceling with back button
+                if (isCancelled()) {
+                  input.close();
+                  return null;
+                }
+                total += count;
+                // publishing the progress....
+                if (fileLength > 0) // only if total length is known
+                  publishProgress((int) (total * 100 / fileLength));
+                fos.write(data, 0, count);
+              }
+              file = returnFile(fileName);
+              existsPdf = true;
+            } catch (FileNotFoundException e) {
+              Log.e("PDF", "Não foi encontrado o ficheiro " + fileName);
+            } catch (IOException e) {
+              Log.e("PDF", "IOException", e);
+            }
+            break;
+
+          default:
+            break;
+        }
+
+      } catch (Exception e) {
+        return e.toString();
+      } finally {
+
+        if (connection != null)
+          connection.disconnect();
+      }
+      return null;
+    }
+
+
+    @Override
+    protected void onPostExecute(String s) {
+      super.onPostExecute(s);
+
+      callback.callback(file);
+    }
+  }
+
+
+
 }

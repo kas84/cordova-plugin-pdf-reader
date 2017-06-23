@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
+import android.webkit.URLUtil;
 import android.widget.Button;
 
 import org.apache.cordova.CallbackContext;
@@ -107,7 +108,13 @@ public class PDFViewer extends CordovaPlugin {
       PermissionHelper.requestPermissions(this, READ_EXTERNAL, new String[] {READ, WRITE});
     } else {
       Intent intent = new Intent(cordova.getActivity(), PdfActivity.class);
-      intent.putExtra("file", url);
+
+      if(URLUtil.isValidUrl(url)){
+        intent.putExtra("url", url);
+      }else{
+        intent.putExtra("file", url);
+      }
+
       intent.putExtra("title", title);
       intent.putExtra("subject", (subject != null)? subject: title);
       intent.putExtra("disabledDescription", disabledDescription);
