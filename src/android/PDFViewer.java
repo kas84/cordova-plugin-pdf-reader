@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,7 +113,11 @@ public class PDFViewer extends CordovaPlugin {
       if(URLUtil.isValidUrl(url)){
         intent.putExtra("url", url);
       }else{
-        intent.putExtra("file", url);
+        PdfUtils pdfUtils = PdfUtils.getInstance(this.cordova.getActivity(), PdfUtils.Mode.EXTERNAL);
+        final File file = pdfUtils.saveFile(this.cordova.getActivity(), title + ".pdf", url);
+
+        intent.putExtra("file_obj", file);
+
       }
 
       intent.putExtra("title", title);

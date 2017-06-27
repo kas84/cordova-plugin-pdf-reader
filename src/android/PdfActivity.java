@@ -77,11 +77,14 @@ public class PdfActivity extends AppCompatActivity
     pdfUtils = PdfUtils.getInstance(this, PdfUtils.Mode.EXTERNAL);
 
     String pdf = null, urlString = null;
+    File fileObj = null;
     if(getIntent().hasExtra("url")){
       urlString = getIntent().getStringExtra("url");
-    }else{
+    }else if(getIntent().hasExtra("file_obj")){
+      fileObj = (File)getIntent().getSerializableExtra("file_obj");
+    } /*else {
       pdf = getIntent().getStringExtra("file");
-    }
+    }*/
 
     title = getIntent().getStringExtra("title");
     subject = getIntent().getStringExtra("subject");
@@ -158,16 +161,22 @@ public class PdfActivity extends AppCompatActivity
       });
 
 
-    }else {
+    }else if (fileObj != null) {
+      final File file = fileObj;
 
+      if (file == null)
+        callbackContext.error("Error opening Pdf");
+
+      initFor(file);
+    }else{
       final File file = pdfUtils.saveFile(this, title + ".pdf", pdf);
 
       if (file == null)
         callbackContext.error("Error opening Pdf");
 
       initFor(file);
-
     }
+
   }
 
   @Override public void loadComplete(int nbPages) {
@@ -193,16 +202,24 @@ public class PdfActivity extends AppCompatActivity
 
   @Override
   protected void onStop() {
-      if(btnPressed){ // normal button events
-       callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, String.valueOf(btnsList.get(btnId).getId())));
+    if(btnPressed){ // normal button events
+      deleteAllFiles();
+      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, String.valueOf(btnsList.get(btnId).getId())));
     }else if(btnBackPressed){ //exiting activity with backbutton
-       callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "-1"));
+      deleteAllFiles();
+      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "-1"));
     }/*else {  //activity went into background (unknown reasons for now)
         PluginResult result = new PluginResult(PluginResult.Status.OK, "-2");
         result.setKeepCallback(true);
         callbackContext.sendPluginResult(result);
     }*/
     super.onStop();
+  }
+
+  private void deleteAllFiles(){
+    try {
+      PdfUtils.deleteCachedPdfs();
+    } catch (Exception e) {}
   }
 
   public void setTypefaces(){
@@ -295,9 +312,5 @@ public class PdfActivity extends AppCompatActivity
 
 
   }
-
-
-
-
 
 }
