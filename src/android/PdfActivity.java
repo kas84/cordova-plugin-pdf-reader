@@ -143,15 +143,17 @@ public class PdfActivity extends AppCompatActivity
     headerTitle = (TextView) findViewById(getIdResourceByName("WebViewHeaderTitle"));
     headerTitle.setText(title);
 
+    btn1.setEnabled(false);
+    btn2.setEnabled(false);
+    btn3.setEnabled(false);
+
     if(urlString != null){
 
       ProgressBar loader = (ProgressBar)findViewById(getIdResourceByName("progressBarLoadingFile"));
       loader.setVisibility(View.GONE);
       loader.setVisibility(View.VISIBLE);
 
-      btn1.setEnabled(false);
-      btn2.setEnabled(false);
-      btn3.setEnabled(false);
+      
 
       pdfUtils.downloadAndSaveFile(this, title + ".pdf", urlString, new PdfUtils.IDownloadCallback() {
         @Override
@@ -261,12 +263,6 @@ public class PdfActivity extends AppCompatActivity
     //hide loading
     ProgressBar loader = (ProgressBar)findViewById(getIdResourceByName("progressBarLoadingFile"));
     loader.setVisibility(View.GONE);
-
-    //re-activate buttons
-    btn1.setEnabled(true);
-    btn2.setEnabled(true);
-    btn3.setEnabled(true);
-
 
     PDFView pdfView = (PDFView) findViewById(getIdResourceByName("pdfView"));
 
