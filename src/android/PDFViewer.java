@@ -29,6 +29,7 @@ public class PDFViewer extends CordovaPlugin {
 
   public static final String PLUGIN_RESPONSE_EXIT_BACKBUTTON = "-1";
   public static final String PLUGIN_RESPONSE_PERMISSIONS_DENIED = "-3";
+  public static final String PLUGIN_RESPONSE_PERMISSIONS_GRANTED = "-4";
 
   public static final String READ = Manifest.permission.READ_EXTERNAL_STORAGE;
   public static final String WRITE = Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -137,5 +138,6 @@ public class PDFViewer extends CordovaPlugin {
         return;
       }
     }
+    callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, PLUGIN_RESPONSE_PERMISSIONS_GRANTED));
   }
 }
