@@ -209,7 +209,7 @@ public class PdfActivity extends AppCompatActivity
       callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, String.valueOf(btnsList.get(btnId).getId())));
     }else if(btnBackPressed){ //exiting activity with backbutton
       deleteAllFiles();
-      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "-1"));
+      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, PDFViewer.PLUGIN_RESPONSE_EXIT_BACKBUTTON));
     }/*else {  //activity went into background (unknown reasons for now)
         PluginResult result = new PluginResult(PluginResult.Status.OK, "-2");
         result.setKeepCallback(true);

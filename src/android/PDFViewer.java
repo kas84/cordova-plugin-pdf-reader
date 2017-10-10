@@ -27,6 +27,9 @@ public class PDFViewer extends CordovaPlugin {
   
   private int READ_EXTERNAL = 0;
 
+  public static final String PLUGIN_RESPONSE_EXIT_BACKBUTTON = "-1";
+  public static final String PLUGIN_RESPONSE_PERMISSIONS_DENIED = "-3";
+
   public static final String READ = Manifest.permission.READ_EXTERNAL_STORAGE;
   public static final String WRITE = Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
@@ -124,6 +127,15 @@ public class PDFViewer extends CordovaPlugin {
       intent.putExtra("subject", (subject != null)? subject: title);
       intent.putExtra("disabledDescription", disabledDescription);
       cordova.getActivity().startActivity(intent);
+    }
+  }
+
+  public void onRequestPermissionResult(int requestCode, String[] permissions, int[] requestResults){
+    for (int index = 0; index < permissions.length; index++) {
+      if(requestResults[index] != PackageManager.PERMISSION_GRANTED){
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, PLUGIN_RESPONSE_PERMISSIONS_DENIED));
+        return;
+      }
     }
   }
 }
