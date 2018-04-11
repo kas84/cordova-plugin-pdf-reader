@@ -9,7 +9,7 @@
 #import "PdfViewerViewController.h"
 #import "UIColor+BPIColor.h"
 
-#define CUSTOM_ORANGE_COLOR [UIColor colorWithRed:255.0/255.0 green:102/255.0 blue:0/255.0 alpha:1]
+#define CUSTOM_ORANGE_COLOR [UIColor colorWithRed:255.0/255.0 green:0.49 blue:0.0/255.0 alpha:1]
 #define CUSTOM_BLUE_COLOR [UIColor colorWithRed:0/255.0 green:0/255.0 blue:83/255.0 alpha:1]
 #define CUSTOM_BLUE_COLOR_DISABLED [UIColor colorWithRed:0.40 green:0.40 blue:0.59 alpha:1.00]
 
@@ -31,6 +31,7 @@
 @property(strong, nonatomic) NSString *viewTitle;
 @property(strong, nonatomic) NSString *subject;
 @property(strong, nonatomic) NSString *textDescription;
+@property(strong, nonatomic) NSURL *localFileURL;
 
 @property(strong, nonatomic) CDVPlugin *plugin;
 @property(strong, nonatomic) NSString *callbackId;
@@ -105,17 +106,24 @@
     self.webView.suppressesIncrementalRendering = YES;
 
     self.webView.scalesPageToFit = YES;
-    NSData* fileData = [[NSData alloc] initWithBase64EncodedString:self.fileString options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    NSString *pdfName = self.viewTitle;
-
-    NSString *guidPDF = [NSString stringWithFormat:@"%@.pdf", pdfName];
-    NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:guidPDF]];
-    [fileData writeToURL:url atomically:NO];
-
-    [self.webView loadData:fileData MIMEType:@"application/pdf" textEncodingName:@"utf-8" baseURL:url];
-
-
-    //[self.view setNeedsUpdateConstraints];
+    //if its a url don't transform
+    if([self.fileString hasPrefix:@"http://"] || [self.fileString hasPrefix:@"https://"])
+    {
+        NSURL* pdfURL = [NSURL URLWithString:self.fileString];
+        NSURLRequest* request = [NSURLRequest requestWithURL:pdfURL];
+        [self.webView loadRequest:request];
+    }
+    else
+    {
+        //if base64 transform into file
+        NSData* fileData = [[NSData alloc] initWithBase64EncodedString:self.fileString options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        NSString *pdfName = self.viewTitle;
+        
+        NSString *guidPDF = [NSString stringWithFormat:@"%@.pdf", pdfName];
+        self.localFileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:guidPDF]];
+        [fileData writeToURL:self.localFileURL atomically:NO];
+        [self.webView loadData:fileData MIMEType:@"application/pdf" textEncodingName:@"utf-8" baseURL:self.localFileURL];
+    }
 
 }
 
@@ -205,11 +213,13 @@
 
     [self dismissViewControllerAnimated:YES
                              completion:^{
-                                 NSURL *resourceUrl = self.webView.request.URL;
-                                 NSError *errorBlock;
-                                 if([[NSFileManager defaultManager] removeItemAtURL:resourceUrl error:&errorBlock] == NO) {
-                                     NSLog(@"error deleting file %@", errorBlock.localizedDescription);
-                                 }
+                                 
+                                NSError *errorBlock;
+                                if([[NSFileManager defaultManager] removeItemAtURL:self.localFileURL error:&errorBlock] == NO) {
+                                    NSLog(@"error deleting file %@", errorBlock.localizedDescription);
+                                }
+                                 self.localFileURL = nil;
+                                 
                                  [self removeFromParentViewController];
                                  
                                  if(!self.plugin) return;
@@ -225,11 +235,25 @@
 - (IBAction)share
 {
     if (!self.isWebViewLoaded) return;
-
+        
     NSURL *resourceUrl = self.webView.request.URL;
+    
+    if([resourceUrl.absoluteString hasPrefix:@"http://"] || [resourceUrl.absoluteString hasPrefix:@"https://"])
+    {
+        //save locally for share (applying name as well)
+        NSData* fileData = [[NSData alloc] initWithContentsOfURL:resourceUrl];
+        NSString *pdfName = self.viewTitle;
+        
+        NSString *guidPDF = [NSString stringWithFormat:@"%@.pdf", pdfName];
+        NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingString:guidPDF]];
+        [fileData writeToURL:url atomically:NO];
+        
+        //switch to local for download
+        self.localFileURL = url;
+        
+    }
 
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[resourceUrl]
-                                                                                        applicationActivities:nil];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.localFileURL] applicationActivities:nil];
     if(self.subject && ![self.subject isEqualToString:@""])
     {
         [activityViewController setValue:self.subject forKey:@"subject"];
@@ -253,10 +277,9 @@
 
     [self dismissViewControllerAnimated:YES
                              completion:^{
-                                 NSURL *resourceUrl = self.webView.request.URL;
                                  NSError *errorBlock;
-                                 if([[NSFileManager defaultManager] removeItemAtURL:resourceUrl error:&errorBlock] == NO) {
-                                     NSLog(@"error deleting file %@", errorBlock.localizedDescription);
+                                 if([[NSFileManager defaultManager] removeItemAtURL:self.localFileURL error:&errorBlock] == NO) {
+                                     NSLog(@"Error deleting file %@. Maybe it was an url.", errorBlock.localizedDescription);
                                  }
                                  [self removeFromParentViewController];
 

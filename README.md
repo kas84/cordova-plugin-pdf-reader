@@ -1,5 +1,5 @@
 <h1>cordova-plugin-pdf-reader</h1>
-<p>This plugin allows you to open a pdf in a native modal. The model has the following structure: header ( tite name, back button, share button ) and Footer (action buttons). You can define the header title (String), the pdf you want to show (base64), and the number of button in the footer bar ( 0 to 3 buttons ).</p>
+<p>This plugin allows you to open a pdf in a native modal. The model has the following structure: header ( tite name, back button, share button ) and Footer (action buttons). You can define the header title (String), the pdf you want to show (base64 or url), and the number of button in the footer bar ( 0 to 3 buttons ).</p>
 <h2>API Reference</h2>
 <h3>PdfReader</h3>
 <pre>PdfReader.openPdf: function(title,url,buttonsArray,successCallback, errorCallback){
@@ -36,7 +36,7 @@
 
         };
 
-PdfReader.openPdf("Title Name","iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAmUlEQVR42u3X3QqAIAwFYKGg1/auF+rnzbo1hQIZImo6j7HBuf9Q2aYyxiikKAEJSEDh6CcQIAd5S/cG+RhXp83UCxTCLL1OiGKOGphSUDNMCYhi9pqYXFBzTA6IYrYWmFQQGyYFRDGXzep15i/JBlFM7RofBHdlkI+atQcN3RhZ5tgvhivk+gG5oMVQsyz56N8g+bkKSECx3F93twfcz7kPAAAAAElFTkSuQmCC",[{"id":1,"name":"btn1","isDefault":"true"},{"id":2,"name":"btn2","isDefault":"false"}],"Email subject", "Description before buttons.", onSuccess, onError);
+PdfReader.openPdf("Title Name","iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAmUlEQVR42u3X3QqAIAwFYKGg1/auF+rnzbo1hQIZImo6j7HBuf9Q2aYyxiikKAEJSEDh6CcQIAd5S/cG+RhXp83UCxTCLL1OiGKOGphSUDNMCYhi9pqYXFBzTA6IYrYWmFQQGyYFRDGXzep15i/JBlFM7RofBHdlkI+atQcN3RhZ5tgvhivk+gG5oMVQsyz56N8g+bkKSECx3F93twfcz7kPAAAAAElFTkSuQmCC",[{"id":1,"name":"btn1","isDefault":"true"},{"id":2,"name":"btn2","isDefault":"false"}],onSuccess, onError,"Email subject", "Description before buttons.");
  </pre>
 <p><strong>Expected Callbacks:</strong></p>
 <pre>	onSuccess:

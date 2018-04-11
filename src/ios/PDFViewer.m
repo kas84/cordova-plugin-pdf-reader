@@ -15,12 +15,12 @@
 - (void)openPdf:(CDVInvokedUrlCommand*)command
 {
     id title = [command argumentAtIndex:0];
-    id base64 = [command argumentAtIndex:1];
+    id url = [command argumentAtIndex:1];
     NSArray* alertArray = [command argumentAtIndex:2];
     NSString *subject = [command argumentAtIndex:3];
     NSString* description = [command argumentAtIndex:4];
     
-    PDFViewerViewController* vc = [PDFViewerViewController initWithFileString:base64
+    PDFViewerViewController* vc = [PDFViewerViewController initWithFileString:url
                                                                      andTitle:title
                                                                    withPlugin:self
                                                                   withButtons:alertArray
