@@ -9,7 +9,7 @@
 #import "PdfViewerViewController.h"
 #import "UIColor+BPIColor.h"
 
-#define CUSTOM_ORANGE_COLOR [UIColor colorWithRed:255.0/255.0 green:0.49 blue:0.0/255.0 alpha:1]
+#define CUSTOM_ORANGE_COLOR [UIColor colorWithRed:255.0/255.0 green:102.0/255.0 blue:0.0/255.0 alpha:1]
 #define CUSTOM_BLUE_COLOR [UIColor colorWithRed:0/255.0 green:0/255.0 blue:83/255.0 alpha:1]
 #define CUSTOM_BLUE_COLOR_DISABLED [UIColor colorWithRed:0.40 green:0.40 blue:0.59 alpha:1.00]
 
