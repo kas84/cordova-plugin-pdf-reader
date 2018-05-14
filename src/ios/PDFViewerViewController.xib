@@ -52,11 +52,11 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DnW-0D-Z5V" userLabel="Header">
+                <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnW-0D-Z5V" userLabel="Header">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iHu-Vx-Agr" userLabel="Title">
-                            <rect key="frame" x="189" y="30" width="37" height="21"/>
+                            <rect key="frame" x="188.66666666666666" y="29.666666666666671" width="37" height="21"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -74,7 +74,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgK-ee-Vj6" userLabel="BackButton">
-                            <rect key="frame" x="8" y="23" width="35" height="35"/>
+                            <rect key="frame" x="8" y="22.666666666666671" width="35" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="35" id="c3Z-Ws-miL"/>
                                 <constraint firstAttribute="height" constant="35" id="z4N-XT-CoE"/>
@@ -94,10 +94,7 @@
                         <constraint firstItem="kgK-ee-Vj6" firstAttribute="leading" secondItem="DnW-0D-Z5V" secondAttribute="leading" constant="8" id="Ua1-np-5bF"/>
                         <constraint firstItem="iHu-Vx-Agr" firstAttribute="centerX" secondItem="DnW-0D-Z5V" secondAttribute="centerX" id="icf-yF-f8g"/>
                         <constraint firstItem="iHu-Vx-Agr" firstAttribute="centerY" secondItem="DnW-0D-Z5V" secondAttribute="centerY" constant="10" id="kyT-Br-2Na"/>
-                        <constraint firstAttribute="height" constant="60" id="ziw-B2-Bda">
-                            <variation key="widthClass=regular" constant="100"/>
-                            <variation key="heightClass=regular-widthClass=regular" constant="110"/>
-                        </constraint>
+                        <constraint firstAttribute="height" constant="60" id="ziw-B2-Bda"/>
                     </constraints>
                 </view>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5qU-89-xw0">
@@ -232,7 +229,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="dxo-Ps-wHF" firstAttribute="top" secondItem="Gvi-M6-emp" secondAttribute="bottom" priority="900" constant="80" id="29B-3G-Asu"/>
+                <constraint firstItem="dxo-Ps-wHF" firstAttribute="top" secondItem="Gvi-M6-emp" secondAttribute="bottom" priority="900" id="29B-3G-Asu"/>
                 <constraint firstItem="Gvi-M6-emp" firstAttribute="top" secondItem="DnW-0D-Z5V" secondAttribute="bottom" id="5Kn-sZ-xgI"/>
                 <constraint firstAttribute="trailing" secondItem="Gvi-M6-emp" secondAttribute="trailing" id="CIJ-zV-J7W"/>
                 <constraint firstItem="5qU-89-xw0" firstAttribute="centerY" secondItem="GDv-Ls-VbD" secondAttribute="centerY" id="Kwn-qb-VmE"/>

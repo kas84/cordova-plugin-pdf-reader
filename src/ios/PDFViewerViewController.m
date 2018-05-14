@@ -177,10 +177,15 @@
         [self.lblDescription removeFromSuperview];
     }
     
-    self.constraintHeightHeader.constant = self.constraintHeightHeader.constant + [UIApplication sharedApplication].statusBarFrame.size.height;
+   // self.header.translatesAutoresizingMaskIntoConstraints = NO;
+    self.constraintHeightHeader.constant  = [UIApplication sharedApplication].statusBarFrame.size.height > 20 ? 84.0 : self.constraintHeightHeader.constant;
     self.constraintCenterBack.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2;
+    self.constraintCenterShare.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2;
+    self.constraintCenterTitle.constant = [UIApplication sharedApplication].statusBarFrame.size.height / 2;
     
-    [self.view setNeedsUpdateConstraints];
+//    [self.header updateConstraintsIfNeeded];
+//    [self.view layoutIfNeeded];
+//    [self.header layoutIfNeeded];
     
     self.webView.scrollView.delegate = self;
 }
